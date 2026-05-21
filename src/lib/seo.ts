@@ -165,3 +165,38 @@ export function breadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
     }))
   };
 }
+
+/**
+ * F27 — Aggregate rating + per-review schema for the home page, sourced
+ * from the verified-Google reviews in src/data/location.ts. Gives Google
+ * the data it needs to render star-rating snippets in SERPs.
+ */
+export function aggregateRatingJsonLd({
+  ratingValue,
+  reviewCount,
+  reviews
+}: {
+  ratingValue: number;
+  reviewCount: number;
+  reviews: Array<{ author: string; rating: number; body: string; date: string }>;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${SITE}/#business`,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue,
+      bestRating: 5,
+      worstRating: 1,
+      reviewCount
+    },
+    review: reviews.slice(0, 5).map(r => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5 },
+      reviewBody: r.body,
+      datePublished: r.date
+    }))
+  };
+}

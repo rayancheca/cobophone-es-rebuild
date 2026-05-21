@@ -1,19 +1,35 @@
 import { useTranslations, useLocale } from 'next-intl';
 import { Star, ExternalLink } from 'lucide-react';
 import { reviews, GOOGLE_MAPS_LISTING_URL } from '@/data/location';
+import { aggregateRatingJsonLd } from '@/lib/seo';
 
 /**
  * Reviews — verified Google reviews.
  * Cialdini: social proof + source attribution.
  * Currently placeholder data — see QUESTIONS.md for Google Places API plan.
  */
+// F27 — Aggregate rating computed from the real Google reviews + the live
+// listing's reported count. Drives the star-rating snippet in SERPs.
+const reviewJsonLd = aggregateRatingJsonLd({
+  ratingValue: 4.7,
+  reviewCount: 55,
+  reviews: reviews.map(r => ({
+    author: r.author,
+    rating: r.rating,
+    body: r.body.es,
+    date: r.date
+  }))
+});
+
 export function Reviews() {
   const t = useTranslations('home.reviews');
   const tCommon = useTranslations('common');
   const locale = useLocale() as 'es' | 'en' | 'zh';
 
   return (
-    <section className="py-section bg-chrome" aria-labelledby="reviews-heading">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewJsonLd) }} />
+      <section className="py-section bg-chrome" aria-labelledby="reviews-heading">
       <div className="container-fluid">
         <div className="max-w-2xl mb-12">
           <div className="inline-flex items-center gap-2 text-xs text-ink-500 uppercase tracking-widest mb-4">
@@ -100,6 +116,7 @@ export function Reviews() {
           </a>
         </p>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

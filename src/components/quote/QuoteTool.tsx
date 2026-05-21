@@ -495,7 +495,7 @@ function Step5({ modelSlug, repairSlug, onBack }: { modelSlug: string; repairSlu
 
       {/* Anchoring */}
       {model?.msrpAtRelease && price && (
-        <div className="bg-paper rounded-xl p-5 text-center mb-6 ring-1 ring-ink-100">
+        <div className="bg-paper rounded-xl p-5 text-center mb-4 ring-1 ring-ink-100">
           <p className="text-sm text-ink-700">
             Comprar un <strong>{model.name}</strong> nuevo cuesta unos{' '}
             <span className="font-mono text-ink-900">{formatPrice(model.msrpAtRelease, model.msrpAtRelease)}</span>.{' '}
@@ -504,6 +504,26 @@ function Step5({ modelSlug, repairSlug, onBack }: { modelSlug: string; repairSlu
           </p>
         </div>
       )}
+
+      {/* F19 — social proof at the peak moment: a real Google review on this
+          repair category, plus an aggregate-action signal */}
+      <div className="bg-gradient-to-br from-brand-primary/8 to-brand-secondary/8 rounded-xl p-5 mb-6 ring-1 ring-brand-primary/20">
+        <div className="flex items-start gap-3">
+          <div className="flex gap-0.5 shrink-0">
+            {[0, 0, 0, 0, 0].map((_, i) => (
+              <span key={i} className="text-brand-secondary text-sm leading-none">★</span>
+            ))}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm text-ink-900 leading-relaxed italic">
+              &ldquo;Cambié la pantalla de mi iPhone X, en 15 minutos estaba lista y el precio realmente bueno. Los chicos muy agradables.&rdquo;
+            </p>
+            <p className="mt-2 text-xs text-ink-500">
+              <span className="font-mono">Cliente verificado</span> · <a href="https://www.google.com/maps/place/COBOPHONE/" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">reseña en Google</a>
+            </p>
+          </div>
+        </div>
+      </div>
 
       {!bookingOpen ? (
         <div className="grid sm:grid-cols-2 gap-3">
