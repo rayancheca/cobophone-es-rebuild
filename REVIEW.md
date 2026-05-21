@@ -35,6 +35,29 @@
 
 ---
 
+## 2026-05-21 — Foundation pass complete
+
+**Deliverable:** working Next.js site at `cobophone/`, two commits, 65 prerendered URLs, all primary routes return HTTP 200, build passes typecheck, bundle under 200KB target.
+
+**Pages built to depth:** home, /presupuesto (instant-quote tool with URL-deep-linkable state through all 6 steps), /mayoristas (B2B portal with pricing tiers + form), /reparacion (device hub), /reparacion/movil/[marca] (brand hubs for all 8 brands), /reparacion/movil/[marca]/[modelo] (29 model pages with AggregateOffer JSON-LD), /ubicacion, /garantia, /contacto, designed 404.
+
+**Strategic shifts during build:**
+- Locale routing → cookie-based for foundation pass; route-based `[locale]/...` migration documented in HANDOFF §7. Reduces complexity now without losing the multilingual story.
+- 3D scenes → CSS placeholder for home hero; full R3F integration plan in `/design/3d-direction.md` and HANDOFF §6. Keeps initial bundle under budget and lets the foundation prove out before adding GLB weight.
+- Mapbox → designed map placeholder; real token wiring in HANDOFF §5. Same reasoning.
+
+**Key facts surfaced into the site:**
+- 40-min promise now in title, H1, and as a recurring chip
+- "Si no sabemos el fallo, es que no existe" rescued from buried copy into the hero
+- Real counter numbers (20 / 20.000 / 3 months / 40 min) replacing the broken "+0/+0/+0"
+- 369-product catalog audit surfaced visibly in the brand grid model counts
+- 818-iPhone-SKU wholesale catalog surfaced visibly in the B2B teaser
+- Slug typo (`reparacion-tellefonos-samsung`) handled via 301 redirect in next.config
+
+**Ready for pitch.** Live URL pending Vercel deploy (HANDOFF §4); local `npm start` confirmed.
+
+---
+
 ## 2026-05-21 — Project kickoff
 
 **Workspace:** Created `cobophone/` subdirectory inside `~/Desktop/Dev/fun/`. Initialized git. Scaffolded `research/`, `strategy/`, `design/`, `data/`, `components/`, `public/`, `src/`, `messages/`, `reports/`, `pitch/` folders.
