@@ -42,7 +42,7 @@ export function HomeHero() {
               {t('headline')}
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg lg:text-xl text-ink-300 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg lg:text-xl text-ink-700 leading-relaxed">
               {t('sub')}
             </p>
 
@@ -52,7 +52,7 @@ export function HomeHero() {
                 <ArrowRight size={18} aria-hidden />
               </ButtonLink>
               <ButtonLink
-                href="https://wa.me/message/Y7WTOGB7WOXGP1"
+                href="https://wa.me/34911234567"
                 target="_blank"
                 rel="noopener"
                 size="xl"
@@ -118,40 +118,96 @@ export function HomeHero() {
  *
  * Rationale: keeps initial JS bundle low while the foundation is stabilized.
  */
+/**
+ * Hero device placeholder — a stylized phone with simulated apps that float
+ * subtly on stagger. Each app is recognizable to a Spanish user (banking,
+ * food delivery, messaging, music, maps, etc.) without copying any brand's
+ * exact mark — these are simplified, color-coded glyphs.
+ *
+ * The 4 floating labels and 12 app icons share a synchronized but staggered
+ * floatY animation (different delays + durations so motion never feels uniform).
+ *
+ * Per /design/3d-direction.md, this slot will eventually host an R3F canvas;
+ * the CSS approximation below sets the composition and feel.
+ */
 function DevicePlaceholder() {
+  // 12 apps in a 3×4 grid — first row dock (bottom)
+  const apps: Array<{ bg: string; emoji?: string; glyph?: string; label: string }> = [
+    { bg: 'from-[#34B7F1] to-[#0084ff]',   glyph: 'M',  label: 'Mensajes' },
+    { bg: 'from-[#25D366] to-[#1DA851]',   glyph: '💬', label: 'WhatsApp' },
+    { bg: 'from-[#FF7A00] to-[#F4511E]',   glyph: 'B',  label: 'BBVA' },
+    { bg: 'from-[#FFCC00] to-[#FFB300]',   glyph: 'G',  label: 'Glovo' },
+    { bg: 'from-[#E1306C] to-[#C13584]',   glyph: 'i',  label: 'Instagram' },
+    { bg: 'from-[#1DB954] to-[#179443]',   glyph: '♪',  label: 'Spotify' },
+    { bg: 'from-[#5F6FFF] to-[#3B4BD8]',   glyph: '🗺', label: 'Maps' },
+    { bg: 'from-[#FF3B30] to-[#D62828]',   glyph: '✉', label: 'Mail' },
+    { bg: 'from-[#A855F7] to-[#7E22CE]',   glyph: '🛒', label: 'Amazon' },
+    { bg: 'from-[#000000] to-[#1F1F1F]',   glyph: '𝕏',  label: 'X' },
+    { bg: 'from-[#FF9500] to-[#E37400]',   glyph: '📷', label: 'Cámara' },
+    { bg: 'from-[#0EA5E9] to-[#0369A1]',   glyph: '☎', label: 'Teléfono' }
+  ];
+
   return (
     <div className="relative aspect-[3/4] w-full max-w-md mx-auto">
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-transparent ring-1 ring-white/10 backdrop-blur-sm" />
+      {/* Outer glow ring */}
+      <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand-primary/20 via-transparent to-brand-secondary/15 blur-2xl pointer-events-none" aria-hidden />
+
+      {/* Phone body */}
       <div
-        className="absolute inset-4 rounded-2xl bg-gradient-to-br from-brand-primary/30 to-shadow-blue-deep ring-1 ring-white/10 shadow-2xl flex items-center justify-center overflow-hidden"
-        style={{ transform: 'perspective(1200px) rotateY(-8deg) rotateX(6deg)' }}
+        className="absolute inset-2 rounded-[2.25rem] bg-gradient-to-br from-[#1A1330] to-shadow-blue-deep ring-1 ring-white/10 shadow-2xl overflow-hidden"
+        style={{ transform: 'perspective(1400px) rotateY(-10deg) rotateX(5deg)' }}
       >
-        <div className="absolute inset-6 rounded-xl bg-shadow-blue-deep ring-1 ring-white/5">
-          <div className="absolute inset-4 grid grid-cols-3 gap-3 opacity-60">
-            {Array.from({ length: 9 }).map((_, i) => (
+        {/* Hairline screen border */}
+        <div className="absolute inset-3 rounded-[1.75rem] bg-gradient-to-br from-[#251846] via-[#1A0E32] to-[#0E0721] ring-1 ring-white/5 overflow-hidden">
+          {/* Status bar */}
+          <div className="absolute top-3 inset-x-0 flex items-center justify-between px-6">
+            <span className="font-mono text-[10px] text-white/90 tabular-nums">9:41</span>
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-1.5 rounded-sm border border-white/40" aria-hidden>
+                <span className="block w-full h-full rounded-sm bg-white/80" />
+              </span>
+            </div>
+          </div>
+
+          {/* Dynamic island */}
+          <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-5 bg-black rounded-full ring-1 ring-white/10" aria-hidden />
+
+          {/* App grid — 3 cols × 4 rows */}
+          <div className="absolute inset-x-4 top-12 grid grid-cols-3 gap-3">
+            {apps.map((app, i) => (
               <div
-                key={i}
-                className="aspect-square rounded-md bg-white/5"
+                key={app.label}
+                className={`relative aspect-square rounded-[1rem] bg-gradient-to-br ${app.bg} flex items-center justify-center shadow-lg ring-1 ring-white/10`}
                 style={{
-                  animation: `pulse 3s ease-in-out ${i * 0.2}s infinite`
+                  animation: `appFloat ${3.6 + (i % 4) * 0.6}s ease-in-out ${(i * 0.18) % 2.4}s infinite`
                 }}
-              />
+              >
+                <span className="text-white text-lg font-bold drop-shadow-sm">{app.glyph}</span>
+                {/* Notification dot on a couple */}
+                {(i === 1 || i === 4 || i === 7) && (
+                  <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-brand-secondary text-white text-[8px] flex items-center justify-center font-bold ring-2 ring-shadow-blue-deep">
+                    {i === 1 ? '3' : i === 4 ? '7' : '1'}
+                  </span>
+                )}
+              </div>
             ))}
           </div>
+
+          {/* Home indicator */}
+          <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 w-24 h-1 rounded-full bg-white/40" aria-hidden />
         </div>
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-shadow-blue-deep rounded-full ring-1 ring-white/10" aria-hidden />
       </div>
 
-      {/* Floating labels */}
-      <FloatLabel className="top-10 -left-4" delay="0s">Pantalla OLED</FloatLabel>
-      <FloatLabel className="top-1/3 -right-6" delay="0.4s">Batería 4500 mAh</FloatLabel>
-      <FloatLabel className="bottom-16 -left-8" delay="0.8s">USB-C</FloatLabel>
-      <FloatLabel className="bottom-4 right-2" delay="1.2s">Cámara 50 MP</FloatLabel>
+      {/* Floating labels — these are component callouts, not screen content */}
+      <FloatLabel className="top-6 -left-2" delay="0s">Pantalla OLED</FloatLabel>
+      <FloatLabel className="top-1/3 -right-6" delay="0.6s">Batería 4500 mAh</FloatLabel>
+      <FloatLabel className="bottom-20 -left-10" delay="1.2s">USB-C</FloatLabel>
+      <FloatLabel className="bottom-6 right-0" delay="1.8s">Cámara 50 MP</FloatLabel>
 
       <style jsx>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.7; }
+        @keyframes appFloat {
+          0%, 100% { transform: translateY(0px); }
+          50%      { transform: translateY(-4px); }
         }
       `}</style>
     </div>
@@ -161,15 +217,15 @@ function DevicePlaceholder() {
 function FloatLabel({ children, className, delay }: { children: React.ReactNode; className?: string; delay?: string }) {
   return (
     <div
-      className={`absolute ${className} text-xs font-mono uppercase tracking-widest text-ink-300 bg-shadow-blue/80 backdrop-blur-sm px-2.5 py-1.5 rounded-md ring-1 ring-white/10`}
-      style={{ animation: `floatY 4s ease-in-out ${delay} infinite` }}
+      className={`absolute ${className} text-xs font-mono uppercase tracking-widest text-ink-700 bg-shadow-blue-deep/90 backdrop-blur-sm px-3 py-1.5 rounded-md ring-1 ring-white/15 shadow-lg z-10`}
+      style={{ animation: `floatY 4.2s ease-in-out ${delay} infinite` }}
     >
-      <span className="text-brand-secondary mr-1">›</span>
+      <span className="text-brand-secondary mr-1.5">›</span>
       {children}
       <style jsx>{`
         @keyframes floatY {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-6px); }
+          50%      { transform: translateY(-8px); }
         }
       `}</style>
     </div>

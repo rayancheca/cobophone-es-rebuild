@@ -56,10 +56,23 @@ export function getOpenStatus(hours: Record<typeof dayMap[number], Array<{ from:
   return { open: false };
 }
 
+/**
+ * Build a WhatsApp deep link that opens a direct chat with our phone number
+ * with `prefilled` as the pre-typed message.
+ *
+ * Uses the `wa.me/<phone>?text=` pattern — this opens the WhatsApp app
+ * directly on a one-on-one chat with us (more reliable than the older
+ * `wa.me/message/<code>` business-link format which sometimes silently
+ * fails on iOS Safari).
+ *
+ * To swap the destination number for production: change WHATSAPP_NUMBER
+ * here. Eventually move to NEXT_PUBLIC_WHATSAPP_NUMBER env var so it can
+ * be split per audience (B2C / B2B) without code changes.
+ */
+const WHATSAPP_NUMBER = '34911234567'; // [VERIFY] replace with the real number before launch
+
 export function buildWhatsAppLink(prefilled: string) {
-  // Production: replace with the brand's WhatsApp Business deep link
-  // For now, route everything to the legacy thread per current site
-  const base = 'https://wa.me/message/Y7WTOGB7WOXGP1';
+  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
   if (!prefilled) return base;
   return `${base}?text=${encodeURIComponent(prefilled)}`;
 }

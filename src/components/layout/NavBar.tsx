@@ -48,29 +48,24 @@ export function NavBar() {
       )}
     >
       <div className="container-fluid h-16 lg:h-20 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo — the PNG includes the wordmark; no double labeling */}
         <Link
           href={`${localePrefix}/`}
-          className="flex items-center gap-2.5"
+          className="inline-flex items-center"
           aria-label="CoboPhone — Inicio"
         >
           <Image
             src="/brand/logo.png"
-            alt=""
-            width={40}
-            height={40}
+            alt="CoboPhone"
+            width={120}
+            height={48}
             priority
+            sizes="120px"
             className={cn(
-              'w-9 h-9 lg:w-10 lg:h-10 transition-[filter] duration-fast',
+              'h-10 lg:h-12 w-auto transition-[filter] duration-fast',
               transparent ? 'brightness-0 invert' : 'brightness-0'
             )}
           />
-          <span className={cn(
-            'font-display font-bold text-lg lg:text-xl tracking-tight transition-colors duration-fast hidden sm:inline',
-            transparent ? 'text-white' : 'text-ink-900'
-          )}>
-            CoboPhone
-          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -134,7 +129,7 @@ export function NavBar() {
               <ButtonLink href={`${localePrefix}/presupuesto`} size="lg" variant="primary" onClick={() => setMobileOpen(false)}>
                 {t('quote')}
               </ButtonLink>
-              <ButtonLink href="https://wa.me/message/Y7WTOGB7WOXGP1" size="lg" variant="whatsapp" target="_blank" rel="noopener">
+              <ButtonLink href="https://wa.me/34911234567" size="lg" variant="whatsapp" target="_blank" rel="noopener">
                 <MessageCircle size={18} aria-hidden /> {t('whatsapp')}
               </ButtonLink>
               <LocaleSwitcher />

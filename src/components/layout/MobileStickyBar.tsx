@@ -19,7 +19,7 @@ export function MobileStickyBar() {
           <span className="text-xs font-medium">Presupuesto</span>
         </Link>
         <a
-          href="https://wa.me/message/Y7WTOGB7WOXGP1"
+          href="https://wa.me/34911234567"
           target="_blank"
           rel="noopener"
           className="flex flex-col items-center justify-center gap-1 py-3 text-ink-900 active:bg-ink-100"

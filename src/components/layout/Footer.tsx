@@ -15,15 +15,14 @@ export function Footer() {
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
           {/* Brand block */}
           <div className="col-span-2">
-            <Link href={`${prefix}/`} className="inline-flex items-center gap-2.5 font-display text-xl font-bold text-white" aria-label="CoboPhone — Inicio">
+            <Link href={`${prefix}/`} className="inline-flex items-center" aria-label="CoboPhone — Inicio">
               <Image
                 src="/brand/logo.png"
-                alt=""
-                width={40}
-                height={40}
-                className="w-10 h-10 brightness-0 invert"
+                alt="CoboPhone"
+                width={150}
+                height={60}
+                className="h-14 w-auto brightness-0 invert"
               />
-              CoboPhone
             </Link>
             <p className="mt-4 max-w-sm text-ink-300 text-balance">
               {t('tagline')}
@@ -43,7 +42,7 @@ export function Footer() {
               </li>
             </ul>
             <div className="mt-6 flex items-center gap-3">
-              <a href="https://wa.me/message/Y7WTOGB7WOXGP1" target="_blank" rel="noopener" className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366] text-white hover:scale-105 transition-transform" aria-label="WhatsApp">
+              <a href="https://wa.me/34911234567" target="_blank" rel="noopener" className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366] text-white hover:scale-105 transition-transform" aria-label="WhatsApp">
                 <MessageCircle size={18} />
               </a>
               <a href="https://instagram.com/cobophonespain" target="_blank" rel="noopener" className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 text-white hover:bg-white/10 transition-colors" aria-label="Instagram">

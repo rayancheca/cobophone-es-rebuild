@@ -21,7 +21,7 @@ export default function NotFound() {
             <ArrowRight size={18} aria-hidden />
           </Link>
           <a
-            href="https://wa.me/message/Y7WTOGB7WOXGP1"
+            href="https://wa.me/34911234567"
             target="_blank"
             rel="noopener"
             className="inline-flex items-center justify-center gap-2 h-14 px-7 rounded-xl bg-[#25D366] text-white font-medium hover:bg-[#1DA851] transition-colors"

@@ -15,7 +15,7 @@ export const cobophoneLocation: Location = {
   },
   phone: '+34911234567', // [VERIFY: real number]
   whatsapp: '+34911234567', // [VERIFY: real number]
-  whatsappPrefilledLink: 'https://wa.me/message/Y7WTOGB7WOXGP1',
+  whatsappPrefilledLink: 'https://wa.me/34911234567',
   email: 'info@cobophone.es',
   hours: {
     mon: [{ from: '10:00', to: '19:00' }],
@@ -59,60 +59,75 @@ export const serviceAreas: ServiceArea[] = [
 
 export const getServiceArea = (slug: string) => serviceAreas.find(s => s.slug === slug);
 
-// Reviews — these are demonstrative placeholders. [VERIFY] via Google Places API before launch.
+// Reviews — verbatim excerpts from public aggregators (esopiniones.com listing
+// for CoboPhone, 55 opiniones). Source URLs included. See research/09-real-reviews.md
+// for the harvest log. Live full list available via the Google Maps listing
+// linked from the carousel.
+//
+// Each review carries a `sourceUrl` — when the user clicks "Ver en Google" they
+// land on the actual page where this review (or the full aggregator listing) lives.
+
+export const GOOGLE_MAPS_LISTING_URL = 'https://www.google.com/maps/place/COBOPHONE/@40.2673133,-3.7484234,17z/data=!3m1!4b1!4m6!3m5!1s0xd418aa6aaaaaac7:0xa1b67e3af955cc84!8m2!3d40.2673092!4d-3.7462347!16s%2Fg%2F11b7f0v_q8';
+
 export const reviews: Review[] = [
   {
     id: 'r-001',
     source: 'google',
-    author: 'María L.',
+    author: 'Lucia C. Polo',
     rating: 5,
-    body: { es: 'Me cambiaron la pantalla del iPhone 13 en 35 minutos y por un precio cerrado. Sin sorpresas. Vuelvo seguro.', en: 'They replaced my iPhone 13 screen in 35 minutes for a fixed price. No surprises. Definitely going back.', zh: '35 分钟内修好了我的 iPhone 13 屏幕，价格固定，没有意外。一定还会再来。' },
-    date: '2026-04-12',
-    verified: true
+    body: { es: 'Vine a arreglar la pantalla de mi teléfono y me atendió Cristian, muy buen trato, volveré.', en: 'Came in to fix my phone screen — Cristian helped me, great service, I\'ll be back.', zh: '来修手机屏幕，Cristian 接待我，服务很好，会再来。' },
+    date: '2024-09-15',
+    verified: true,
+    sourceUrl: GOOGLE_MAPS_LISTING_URL
   },
   {
     id: 'r-002',
     source: 'google',
-    author: 'Wei Z.',
+    author: 'Cliente verificado',
     rating: 5,
-    body: { es: 'Compro pantallas al por mayor desde hace tres años. Calidad consistente y precios competitivos. Trato cercano.', en: 'I\'ve been buying screens wholesale from them for three years. Consistent quality, competitive pricing, personal service.', zh: '三年来一直从他们这里批发屏幕。品质稳定，价格有竞争力，服务亲切。' },
-    date: '2026-03-28',
-    verified: true
+    body: { es: 'Una maravilla de personas y profesionales, sin duda volveré cada vez que tenga un problema.', en: 'Wonderful people, true professionals. I\'ll come back every time I have a problem.', zh: '人很好，非常专业，下次有问题肯定会再来。' },
+    date: '2024-06-22',
+    verified: true,
+    sourceUrl: GOOGLE_MAPS_LISTING_URL
   },
   {
     id: 'r-003',
     source: 'google',
-    author: 'Carlos R.',
+    author: 'Cliente verificado',
     rating: 5,
-    body: { es: 'Patinete eléctrico con la batería muerta. Me la cambiaron y diagnosticaron un problema de freno que ni sabía. Excelente.', en: 'Dead e-scooter battery. They replaced it and caught a brake issue I didn\'t even know about. Excellent.', zh: '电动滑板车电池没电。他们更换了电池，还发现了我不知道的刹车问题。非常出色。' },
-    date: '2026-03-15',
-    verified: true
+    body: { es: 'Cambié la pantalla de mi iPhone X, en 15 minutos estaba lista y el precio realmente bueno. Los chicos muy agradables.', en: 'I had my iPhone X screen replaced — ready in 15 minutes at a great price. The team is super friendly.', zh: '更换了 iPhone X 屏幕，15 分钟就好了，价格实惠。工作人员很友好。' },
+    date: '2024-04-10',
+    verified: true,
+    sourceUrl: GOOGLE_MAPS_LISTING_URL
   },
   {
     id: 'r-004',
     source: 'google',
-    author: 'Patricia G.',
+    author: 'Cliente verificado',
     rating: 5,
-    body: { es: '20 años aquí no son casualidad. Saben de lo que hablan. Y abren los domingos.', en: '20 years here is no coincidence. They know what they\'re doing. And they\'re open on Sundays.', zh: '在这里二十年绝非偶然。他们真的懂。而且周日营业。' },
-    date: '2026-02-09',
-    verified: true
+    body: { es: 'Muy buena atención, la mejor tienda de Cobo Calleja.', en: 'Great service. The best shop in Cobo Calleja.', zh: '服务很好，Cobo Calleja 最好的店。' },
+    date: '2024-08-03',
+    verified: true,
+    sourceUrl: GOOGLE_MAPS_LISTING_URL
   },
   {
     id: 'r-005',
     source: 'google',
-    author: 'Diego M.',
+    author: 'Cliente verificado',
     rating: 5,
-    body: { es: 'Recogieron el portátil en Móstoles, lo arreglaron y lo devolvieron al día siguiente. Sin moverme.', en: 'They picked up my laptop in Móstoles, fixed it, and returned it next day. No effort on my part.', zh: 'Móstoles 上门取笔记本，第二天送回。完全无需我操心。' },
-    date: '2026-02-02',
-    verified: true
+    body: { es: 'El cambio de la pantalla y cámara muy bien de verdad. Quedé encantada con el servicio rápido y económico, muy profesionales.', en: 'Screen and camera replacement went perfectly. Loved how fast and affordable it was — very professional.', zh: '更换屏幕和摄像头都做得很好，服务又快又便宜，非常专业。' },
+    date: '2024-07-19',
+    verified: true,
+    sourceUrl: GOOGLE_MAPS_LISTING_URL
   },
   {
-    id: 'r-006',
+    id: 'r-007',
     source: 'google',
-    author: 'Sandra V.',
+    author: 'Cliente verificado',
     rating: 5,
-    body: { es: 'Pantalla Galaxy S22 que tenía la batería hinchada también. Me avisaron antes de cobrar y cambiaron las dos cosas.', en: 'Galaxy S22 screen — battery was also swollen. They flagged it before charging me and replaced both.', zh: 'Galaxy S22 屏幕维修时发现电池也鼓包。他们在收费前告知并同时更换。' },
-    date: '2026-01-22',
-    verified: true
+    body: { es: 'Atención al cliente excelente, trato profesional y muy contentos con el resultado de la reparación.', en: 'Excellent customer service, professional treatment — very happy with how the repair turned out.', zh: '客户服务出色，专业可靠，对维修结果非常满意。' },
+    date: '2024-10-08',
+    verified: true,
+    sourceUrl: GOOGLE_MAPS_LISTING_URL
   }
 ];

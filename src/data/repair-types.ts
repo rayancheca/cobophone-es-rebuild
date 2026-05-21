@@ -107,6 +107,246 @@ export const repairTypes: RepairType[] = [
     sortOrder: 7
   },
   {
+    id: 'altavoz',
+    slug: 'altavoz',
+    name: { es: 'Altavoz', en: 'Speaker', zh: '扬声器' },
+    description: {
+      es: 'Sonido distorsionado, sin volumen o ausente. Sustitución del módulo de altavoz.',
+      en: 'Distorted, low or no sound. Speaker module replacement.',
+      zh: '声音失真、过低或无声。更换扬声器模组。'
+    },
+    icon: 'speaker',
+    averageDurationMinutes: 45,
+    warrantyMonths: 3,
+    applicableCategories: ['movil', 'tablet', 'portatil', 'consola', 'television'],
+    sortOrder: 8
+  },
+  {
+    id: 'microfono',
+    slug: 'microfono',
+    name: { es: 'Micrófono', en: 'Microphone', zh: '麦克风' },
+    description: {
+      es: 'Si no te oyen en las llamadas o se acopla. Sustitución del micrófono.',
+      en: 'If you can\'t be heard on calls or the audio loops. Microphone replacement.',
+      zh: '通话时对方听不到或有回音。更换麦克风。'
+    },
+    icon: 'mic',
+    averageDurationMinutes: 45,
+    warrantyMonths: 3,
+    applicableCategories: ['movil', 'tablet', 'portatil'],
+    sortOrder: 9
+  },
+  {
+    id: 'vibrador',
+    slug: 'vibrador',
+    name: { es: 'Vibrador', en: 'Vibration motor', zh: '振动马达' },
+    description: {
+      es: 'Si el móvil ya no vibra o vibra de forma extraña. Sustitución del motor de vibración.',
+      en: 'If the phone won\'t vibrate or vibrates oddly. Vibration motor replacement.',
+      zh: '手机不振动或振动异常。更换振动马达。'
+    },
+    icon: 'vibrate',
+    averageDurationMinutes: 40,
+    warrantyMonths: 3,
+    applicableCategories: ['movil', 'tablet'],
+    sortOrder: 10
+  },
+  {
+    id: 'sensor-proximidad',
+    slug: 'sensor-proximidad',
+    name: { es: 'Sensor de proximidad / luz', en: 'Proximity / light sensor', zh: '距离 / 光线传感器' },
+    description: {
+      es: 'La pantalla no se apaga al llamar o el brillo automático no funciona. Sustitución del sensor.',
+      en: 'Screen doesn\'t turn off on calls or auto-brightness fails. Sensor replacement.',
+      zh: '通话时屏幕不熄屏或自动亮度失效。更换传感器。'
+    },
+    icon: 'eye',
+    averageDurationMinutes: 45,
+    warrantyMonths: 3,
+    applicableCategories: ['movil', 'tablet'],
+    sortOrder: 11
+  },
+  {
+    id: 'biometria',
+    slug: 'biometria',
+    name: { es: 'Face ID / Huella', en: 'Face ID / Fingerprint', zh: 'Face ID / 指纹识别' },
+    description: {
+      es: 'Reparación o re-calibración de Face ID, Touch ID o sensor de huella en pantalla. Trabajo a nivel de placa.',
+      en: 'Face ID, Touch ID or in-display fingerprint repair / recalibration. Board-level work.',
+      zh: '修复或重新校准 Face ID、Touch ID 或屏下指纹。主板级修复。'
+    },
+    icon: 'fingerprint',
+    averageDurationMinutes: 120,
+    warrantyMonths: 1,
+    applicableCategories: ['movil', 'tablet'],
+    sortOrder: 12
+  },
+  {
+    id: 'antena-wifi',
+    slug: 'antena-wifi',
+    name: { es: 'Antena WiFi / Bluetooth', en: 'WiFi / Bluetooth antenna', zh: 'WiFi / 蓝牙天线' },
+    description: {
+      es: 'Si no conecta a redes o el Bluetooth no detecta dispositivos. Sustitución del módulo de antena.',
+      en: 'If it won\'t connect to networks or Bluetooth misses devices. Antenna module replacement.',
+      zh: '无法连接网络或蓝牙无法识别设备。更换天线模组。'
+    },
+    icon: 'wifi',
+    averageDurationMinutes: 60,
+    warrantyMonths: 3,
+    applicableCategories: ['movil', 'tablet', 'portatil', 'consola'],
+    sortOrder: 13
+  },
+  {
+    id: 'botones',
+    slug: 'botones',
+    name: { es: 'Botones (encendido, volumen)', en: 'Buttons (power, volume)', zh: '按键（电源、音量）' },
+    description: {
+      es: 'Botones atascados o que no responden. Sustitución del flex de botones.',
+      en: 'Stuck or unresponsive buttons. Button-flex replacement.',
+      zh: '按键卡住或无反应。更换按键排线。'
+    },
+    icon: 'square',
+    averageDurationMinutes: 50,
+    warrantyMonths: 3,
+    applicableCategories: ['movil', 'tablet', 'portatil', 'consola'],
+    sortOrder: 14
+  },
+  {
+    id: 'liberacion-sim',
+    slug: 'liberacion-sim',
+    name: { es: 'Liberación SIM', en: 'SIM unlock', zh: '解锁 SIM' },
+    description: {
+      es: 'Liberación del móvil para usar cualquier operadora. Compatible con todas las marcas.',
+      en: 'Unlock your phone to use any carrier. Works with every brand.',
+      zh: '解锁手机以使用任意运营商。支持所有品牌。'
+    },
+    icon: 'unlock',
+    averageDurationMinutes: 30,
+    warrantyMonths: 1,
+    applicableCategories: ['movil'],
+    sortOrder: 15
+  },
+  {
+    id: 'recuperacion-datos',
+    slug: 'recuperacion-datos',
+    name: { es: 'Recuperación de datos', en: 'Data recovery', zh: '数据恢复' },
+    description: {
+      es: 'Si tu dispositivo no enciende y necesitas las fotos, contactos o documentos. Pago según éxito.',
+      en: 'If your device won\'t boot and you need photos, contacts or documents. Pay-on-success.',
+      zh: '若设备无法启动但需要找回照片、联系人或文件。按结果付费。'
+    },
+    icon: 'database',
+    averageDurationMinutes: 240,
+    warrantyMonths: 0,
+    applicableCategories: ['movil', 'tablet', 'portatil'],
+    sortOrder: 16
+  },
+  {
+    id: 'sistema-operativo',
+    slug: 'sistema-operativo',
+    name: { es: 'Sistema operativo / formateo', en: 'OS install / factory reset', zh: '系统安装 / 重置' },
+    description: {
+      es: 'Reinstalación de Windows, macOS, iOS o Android sin perder tus datos cuando es posible.',
+      en: 'Windows, macOS, iOS or Android reinstall — preserving your data when possible.',
+      zh: '重新安装 Windows / macOS / iOS / Android，尽可能保留您的数据。'
+    },
+    icon: 'monitor',
+    averageDurationMinutes: 90,
+    warrantyMonths: 1,
+    applicableCategories: ['movil', 'tablet', 'portatil'],
+    sortOrder: 17
+  },
+  {
+    id: 'limpieza-interna',
+    slug: 'limpieza-interna',
+    name: { es: 'Limpieza interna y pasta térmica', en: 'Internal cleaning + thermal paste', zh: '内部清洁与导热硅脂' },
+    description: {
+      es: 'Para portátiles y consolas que se calientan o hacen ruido. Limpieza profunda + pasta nueva.',
+      en: 'For laptops and consoles that overheat or get loud. Deep clean + fresh paste.',
+      zh: '适用于过热或噪音大的笔记本和游戏机。深度清洁并更换硅脂。'
+    },
+    icon: 'fan',
+    averageDurationMinutes: 90,
+    warrantyMonths: 3,
+    applicableCategories: ['portatil', 'consola'],
+    sortOrder: 18
+  },
+  {
+    id: 'upgrade-ssd-ram',
+    slug: 'upgrade-ssd-ram',
+    name: { es: 'Ampliación de RAM o SSD', en: 'RAM / SSD upgrade', zh: '升级内存 / SSD' },
+    description: {
+      es: 'Más memoria y más espacio. Clonamos tu sistema operativo en el nuevo disco sin perder datos.',
+      en: 'More memory and more storage. We clone your OS to the new drive — no data loss.',
+      zh: '更多内存与存储空间。将系统克隆到新硬盘，数据不丢失。'
+    },
+    icon: 'hard-drive',
+    averageDurationMinutes: 90,
+    warrantyMonths: 3,
+    applicableCategories: ['portatil'],
+    sortOrder: 19
+  },
+  {
+    id: 'joystick-drift',
+    slug: 'joystick-drift',
+    name: { es: 'Joystick / drift de mando', en: 'Joystick drift', zh: '摇杆漂移' },
+    description: {
+      es: 'El joystick se mueve solo en juegos. Sustitución del módulo del joystick — problema común en Switch y DualSense.',
+      en: 'Joystick drifts on its own in games. Module replacement — common on Switch and DualSense.',
+      zh: '游戏中摇杆自动漂移。更换摇杆模组——Switch 与 DualSense 常见问题。'
+    },
+    icon: 'gamepad',
+    averageDurationMinutes: 45,
+    warrantyMonths: 3,
+    applicableCategories: ['consola'],
+    sortOrder: 20
+  },
+  {
+    id: 'rueda-patinete',
+    slug: 'rueda-patinete',
+    name: { es: 'Rueda / neumático', en: 'Wheel / tire', zh: '轮胎' },
+    description: {
+      es: 'Cambio de neumático tubeless o con cámara. Stock para los modelos Xiaomi más comunes.',
+      en: 'Tubeless or inner-tube tire swap. We stock the most common Xiaomi models.',
+      zh: '更换无内胎或有内胎的轮胎。常备小米常见型号。'
+    },
+    icon: 'circle',
+    averageDurationMinutes: 30,
+    warrantyMonths: 3,
+    applicableCategories: ['patinete-electrico'],
+    sortOrder: 21
+  },
+  {
+    id: 'controlador-patinete',
+    slug: 'controlador-patinete',
+    name: { es: 'Controlador / centralita', en: 'Controller board', zh: '控制器主板' },
+    description: {
+      es: 'Si el patinete no enciende, no acelera o pierde potencia. Diagnóstico de la centralita.',
+      en: 'If the scooter won\'t turn on, won\'t accelerate, or loses power. Controller board diagnostic.',
+      zh: '滑板车无法开机、不加速或动力下降。诊断主板。'
+    },
+    icon: 'cpu',
+    averageDurationMinutes: 90,
+    warrantyMonths: 3,
+    applicableCategories: ['patinete-electrico'],
+    sortOrder: 22
+  },
+  {
+    id: 'led-television',
+    slug: 'led-television',
+    name: { es: 'LEDs de retroiluminación (TV)', en: 'TV backlight LEDs', zh: '电视背光 LED' },
+    description: {
+      es: 'TV que se enciende pero pantalla negra: LEDs individuales fundidos. Sustitución de la tira de LEDs.',
+      en: 'TV powers on but screen is dark: individual LEDs blown. LED strip replacement.',
+      zh: '电视开机但屏幕全黑：背光 LED 烧毁。更换 LED 灯条。'
+    },
+    icon: 'tv',
+    averageDurationMinutes: 180,
+    warrantyMonths: 3,
+    applicableCategories: ['television'],
+    sortOrder: 23
+  },
+  {
     id: 'otros',
     slug: 'otros',
     name: { es: 'Otros problemas', en: 'Other issues', zh: '其它问题' },

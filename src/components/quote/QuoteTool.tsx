@@ -8,11 +8,12 @@ import { Smartphone, Tablet, Laptop, Watch, Gamepad2, Tv, Bike } from 'lucide-re
 
 import { useQuoteStore } from '@/lib/quote-store';
 import { brands, getBrand } from '@/data/brands';
-import { models, getTopModels, getModel } from '@/data/models';
+import { models, getModel } from '@/data/models';
 import { repairTypes, getRepairType } from '@/data/repair-types';
 import { getPrice } from '@/data/prices';
 import { formatPrice, buildWhatsAppLink } from '@/lib/utils';
 import { ButtonLink } from '@/components/ui/Button';
+import { ModelImage } from '@/components/ui/ModelImage';
 import { cn } from '@/lib/utils';
 
 const categories = [
@@ -253,13 +254,11 @@ function Step3({ brandSlug, onBack, onSelect }: { brandSlug: string; onBack: () 
             className="group relative text-left p-4 rounded-xl bg-paper ring-1 ring-ink-100 hover:ring-brand-primary hover:bg-chrome hover:-translate-y-0.5 transition-all duration-fast ease-out-expo"
           >
             {i === 0 && (
-              <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-brand-secondary text-shadow-blue text-[10px] font-bold uppercase tracking-widest">
+              <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-brand-secondary text-white text-[10px] font-bold uppercase tracking-widest z-10">
                 {t('popular')}
               </span>
             )}
-            <div className="aspect-square mb-3 rounded-lg bg-ink-100 flex items-center justify-center text-ink-300">
-              <Smartphone size={28} aria-hidden />
-            </div>
+            <ModelImage modelName={m.name} brandSlug={brandSlug} className="mb-3" />
             <p className="font-semibold text-sm text-ink-900">{m.name}</p>
             <p className="mt-0.5 text-xs text-ink-500 font-mono">{m.year}</p>
           </button>

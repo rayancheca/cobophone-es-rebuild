@@ -89,37 +89,47 @@ export function LocationBlock() {
   );
 }
 
-/** Map placeholder — production swap with Mapbox GL JS (see HANDOFF.md) */
+/**
+ * Real Google Maps embed pointed at Calle Bembibre 5, Cobo Calleja.
+ *
+ * The embed URL uses the public `q=` parameter (no API key required, free,
+ * supported indefinitely by Google). Includes a UI overlay below the map
+ * with the address + a "Cómo llegar" deep-link to Google Maps directions.
+ */
 function MapPlaceholder() {
+  // q=Calle+Bembibre+5,+Cobo+Calleja,+Fuenlabrada — Google geocodes this
+  const embedSrc = 'https://www.google.com/maps?q=Calle+Bembibre+5,+28947+Fuenlabrada,+Madrid&z=16&output=embed';
+  const directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=Calle+Bembibre+5%2C+28947+Fuenlabrada%2C+Madrid';
+
   return (
-    <div className="relative aspect-[4/3] rounded-2xl bg-shadow-blue dot-grid overflow-hidden shadow-elevated ring-1 ring-ink-100">
-      <div className="absolute inset-0 bg-gradient-to-br from-shadow-blue via-shadow-blue to-shadow-blue-deep opacity-90" />
-
-      {/* Mock road lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-        <path d="M0 150 L400 150" stroke="white" strokeWidth="0.5" />
-        <path d="M0 100 L400 130" stroke="white" strokeWidth="0.3" />
-        <path d="M200 0 L200 300" stroke="white" strokeWidth="0.5" />
-        <path d="M150 0 L180 300" stroke="white" strokeWidth="0.3" />
-        <path d="M0 220 L400 230" stroke="white" strokeWidth="0.4" />
-      </svg>
-
-      {/* Pin */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="relative">
-          <div className="absolute inset-0 w-16 h-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-primary/30 animate-ping" style={{ animationDuration: '3s' }} />
-          <div className="relative w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center shadow-pop ring-4 ring-white">
-            <MapPin size={18} aria-hidden />
+    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated ring-1 ring-ink-100 bg-shadow-blue group">
+      <iframe
+        src={embedSrc}
+        title="Mapa de CoboPhone — Calle Bembibre 5, Cobo Calleja, Fuenlabrada"
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        className="absolute inset-0 w-full h-full border-0"
+        allowFullScreen
+      />
+      {/* Overlay card with action */}
+      <a
+        href={directionsUrl}
+        target="_blank"
+        rel="noopener"
+        className="absolute bottom-4 left-4 right-4 bg-chrome/95 backdrop-blur-md rounded-xl p-4 shadow-elevated ring-1 ring-ink-100 hover:ring-brand-primary transition-all"
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-xs uppercase tracking-widest text-ink-500 font-mono">Tienda principal</p>
+            <p className="mt-1 text-sm font-medium text-ink-900">Calle Bembibre 5, Cobo Calleja</p>
+            <p className="text-xs text-ink-500">Fuenlabrada, Madrid · 28947</p>
           </div>
+          <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-primary text-white text-xs font-medium hover:bg-brand-primary-hover transition-colors">
+            <MapPin size={14} aria-hidden />
+            Cómo llegar
+          </span>
         </div>
-      </div>
-
-      {/* Label */}
-      <div className="absolute bottom-4 left-4 right-4 bg-chrome/95 backdrop-blur-sm rounded-xl p-4 shadow-card">
-        <p className="text-xs uppercase tracking-widest text-ink-500 font-mono">Tienda principal</p>
-        <p className="mt-1 text-sm font-medium text-ink-900">Calle Bembibre 5, Cobo Calleja</p>
-        <p className="text-xs text-ink-500">Fuenlabrada, Madrid · 28947</p>
-      </div>
+      </a>
     </div>
   );
 }

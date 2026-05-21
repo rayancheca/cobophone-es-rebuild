@@ -6,6 +6,7 @@ import { Brands } from '@/components/sections/Brands';
 import { Reviews } from '@/components/sections/Reviews';
 import { WholesaleTeaser } from '@/components/sections/WholesaleTeaser';
 import { LocationBlock } from '@/components/sections/LocationBlock';
+import { ContactForm } from '@/components/sections/ContactForm';
 import { FinalCta } from '@/components/sections/FinalCta';
 
 export default function HomePage() {
@@ -19,6 +20,7 @@ export default function HomePage() {
       <Reviews />
       <WholesaleTeaser />
       <LocationBlock />
+      <ContactForm />
       <FinalCta />
     </>
   );

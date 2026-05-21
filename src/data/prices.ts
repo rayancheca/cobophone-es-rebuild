@@ -121,7 +121,77 @@ export const prices: PriceEntry[] = [
   p('pixel-8', 'pantalla', 169, 229),
   p('pixel-8', 'bateria', 69, 89),
   p('pixel-7a', 'pantalla', 119, 169),
-  p('pixel-7a', 'bateria', 59, 79)
+  p('pixel-7a', 'bateria', 59, 79),
+
+  // ─── Additional repair types — top models ─────────────────
+  // Speakers
+  p('iphone-15-pro', 'altavoz', 79, 119),
+  p('iphone-14-pro', 'altavoz', 69, 99),
+  p('iphone-13', 'altavoz', 59, 89),
+  p('iphone-12', 'altavoz', 49, 79),
+  p('galaxy-s24', 'altavoz', 69, 99),
+  p('galaxy-s23', 'altavoz', 59, 89),
+  p('redmi-note-13', 'altavoz', 39, 69),
+
+  // Microphone
+  p('iphone-15-pro', 'microfono', 69, 99),
+  p('iphone-14-pro', 'microfono', 59, 89),
+  p('iphone-13', 'microfono', 49, 79),
+  p('iphone-12', 'microfono', 49, 69),
+  p('galaxy-s24', 'microfono', 59, 89),
+  p('galaxy-s23', 'microfono', 49, 79),
+
+  // Vibration
+  p('iphone-15-pro', 'vibrador', 49, 79),
+  p('iphone-13', 'vibrador', 39, 59),
+  p('galaxy-s23', 'vibrador', 39, 59),
+
+  // Proximity / light sensor
+  p('iphone-15-pro', 'sensor-proximidad', 59, 89),
+  p('iphone-13', 'sensor-proximidad', 49, 79),
+  p('galaxy-s23', 'sensor-proximidad', 49, 69),
+
+  // Face ID / fingerprint
+  p('iphone-15-pro', 'biometria', 149, 249, 'medium'),
+  p('iphone-14-pro', 'biometria', 139, 229),
+  p('iphone-13', 'biometria', 119, 199),
+  p('iphone-12', 'biometria', 99, 179),
+  p('galaxy-s24', 'biometria', 89, 149),
+  p('galaxy-s23', 'biometria', 79, 139),
+
+  // WiFi antenna
+  p('iphone-15-pro', 'antena-wifi', 79, 119),
+  p('iphone-13', 'antena-wifi', 59, 89),
+  p('galaxy-s23', 'antena-wifi', 59, 89),
+
+  // Buttons
+  p('iphone-15-pro', 'botones', 49, 79),
+  p('iphone-13', 'botones', 39, 69),
+  p('iphone-12', 'botones', 39, 59),
+  p('galaxy-s23', 'botones', 39, 69),
+
+  // SIM unlock (universal price)
+  p('iphone-15-pro', 'liberacion-sim', 25, 45),
+  p('iphone-14-pro', 'liberacion-sim', 25, 45),
+  p('iphone-13', 'liberacion-sim', 25, 45),
+  p('iphone-12', 'liberacion-sim', 25, 45),
+  p('iphone-11', 'liberacion-sim', 25, 45),
+  p('galaxy-s24', 'liberacion-sim', 25, 45),
+  p('galaxy-s23', 'liberacion-sim', 25, 45),
+
+  // Data recovery (success-based)
+  p('iphone-15-pro', 'recuperacion-datos', 99, 299, 'low'),
+  p('iphone-13', 'recuperacion-datos', 99, 249, 'low'),
+  p('iphone-12', 'recuperacion-datos', 99, 249, 'low'),
+  p('galaxy-s24', 'recuperacion-datos', 99, 249, 'low'),
+  p('galaxy-s23', 'recuperacion-datos', 99, 249, 'low'),
+
+  // OS install / factory reset
+  p('iphone-15-pro', 'sistema-operativo', 39, 69),
+  p('iphone-13', 'sistema-operativo', 39, 59),
+  p('iphone-12', 'sistema-operativo', 39, 59),
+  p('galaxy-s24', 'sistema-operativo', 39, 59),
+  p('galaxy-s23', 'sistema-operativo', 39, 59)
 ];
 
 export const getPrice = (modelSlug: string, repairSlug: string) =>

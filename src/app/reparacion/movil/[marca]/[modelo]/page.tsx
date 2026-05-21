@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight, Smartphone, Clock, ShieldCheck, MessageCircle, Check } from 'lucide-react';
+import { ArrowRight, Clock, ShieldCheck, MessageCircle, Check } from 'lucide-react';
 import { getBrand } from '@/data/brands';
 import { getModel, models } from '@/data/models';
+import { ModelImage } from '@/components/ui/ModelImage';
 import { repairTypes } from '@/data/repair-types';
 import { getPricesForModel } from '@/data/prices';
 import { formatPrice } from '@/lib/utils';
@@ -110,7 +111,7 @@ export default async function ModelPage({ params }: { params: Promise<{ marca: s
                   <ArrowRight size={18} aria-hidden />
                 </Link>
                 <a
-                  href={`https://wa.me/message/Y7WTOGB7WOXGP1?text=${encodeURIComponent(`Hola, mi ${model.name} necesita reparación. ¿Cuándo podéis recibirme?`)}`}
+                  href={`https://wa.me/34911234567?text=${encodeURIComponent(`Hola, mi ${model.name} necesita reparación. ¿Cuándo podéis recibirme?`)}`}
                   target="_blank"
                   rel="noopener"
                   className="inline-flex items-center justify-center gap-2 h-14 px-7 rounded-xl bg-[#25D366] text-white font-medium hover:bg-[#1DA851] transition-colors"
@@ -123,9 +124,7 @@ export default async function ModelPage({ params }: { params: Promise<{ marca: s
 
             <div className="lg:col-span-5">
               <div className="bg-chrome rounded-3xl p-8 ring-1 ring-ink-100 shadow-elevated">
-                <div className="aspect-square rounded-2xl bg-paper flex items-center justify-center text-ink-300">
-                  <Smartphone size={120} aria-hidden />
-                </div>
+                <ModelImage modelName={model.name} brandSlug={brand.slug} className="max-w-xs mx-auto" />
                 {model.msrpAtRelease && (
                   <p className="mt-4 text-xs text-ink-500 font-mono uppercase tracking-widest text-center">
                     Precio nuevo en lanzamiento: {formatPrice(model.msrpAtRelease, model.msrpAtRelease)}
@@ -221,9 +220,7 @@ export default async function ModelPage({ params }: { params: Promise<{ marca: s
                   href={`/reparacion/movil/${brand.slug}/${n.slug}`}
                   className="group bg-paper rounded-2xl p-5 ring-1 ring-ink-100 hover:ring-brand-primary hover:-translate-y-0.5 transition-all duration-fast"
                 >
-                  <div className="aspect-square mb-3 rounded-lg bg-ink-100 flex items-center justify-center text-ink-300">
-                    <Smartphone size={36} aria-hidden />
-                  </div>
+                  <ModelImage modelName={n.name} brandSlug={brand.slug} className="mb-3" />
                   <p className="font-semibold text-ink-900">{n.name}</p>
                   <p className="text-xs font-mono text-ink-500 mt-1">{n.year}</p>
                 </Link>

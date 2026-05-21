@@ -24,7 +24,7 @@ export default function ContactoPage() {
 
               {/* WhatsApp first, designed as a surface */}
               <a
-                href="https://wa.me/message/Y7WTOGB7WOXGP1"
+                href="https://wa.me/34911234567"
                 target="_blank"
                 rel="noopener"
                 className="mt-10 group block bg-chrome rounded-2xl p-6 ring-1 ring-ink-100 hover:ring-[#25D366] hover:shadow-elevated transition-all duration-fast ease-out-expo"

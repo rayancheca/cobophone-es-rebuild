@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
+import { BrandLogo } from '@/components/ui/BrandLogo';
 
 /**
  * Brand grid — 8 logos with model counts.
@@ -34,15 +35,18 @@ export function Brands() {
               href={`${prefix}/reparacion/movil/${b.slug}`}
               className="group relative bg-chrome rounded-2xl p-6 shadow-card hover:shadow-elevated transition-all duration-fast ease-out-expo hover:-translate-y-0.5 ring-1 ring-ink-100"
             >
-              <div className="flex items-center justify-between mb-6">
-                <span className="font-display font-semibold text-2xl text-ink-900 tracking-tight">
-                  {b.name}
-                </span>
-                <span className="font-mono text-xs text-ink-500 tabular-nums">
-                  {b.count} modelos
+              <div className="flex items-start justify-between mb-6 min-h-[44px]">
+                <BrandLogo
+                  brand={b.slug}
+                  className="text-ink-900 group-hover:text-brand-primary transition-colors duration-fast"
+                  width={100}
+                />
+                <span className="font-mono text-xs text-ink-500 tabular-nums shrink-0">
+                  {b.count}
                 </span>
               </div>
-              <div className="text-sm text-ink-500 group-hover:text-brand-primary transition-colors duration-fast">
+              <p className="text-xs text-ink-500 mb-1">{b.count} modelos en catálogo</p>
+              <div className="text-sm text-ink-500 group-hover:text-brand-primary transition-colors duration-fast mt-2">
                 Ver reparaciones →
               </div>
             </Link>

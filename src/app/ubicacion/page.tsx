@@ -93,7 +93,7 @@ export default function UbicacionPage() {
               <p className="text-xs uppercase tracking-widest text-ink-500 font-mono">Teléfono</p>
               <p className="mt-1 text-ink-900 font-medium">+34 911 23 45 67</p>
             </a>
-            <a href="https://wa.me/message/Y7WTOGB7WOXGP1" target="_blank" rel="noopener" className="group bg-chrome rounded-xl p-5 ring-1 ring-ink-100 hover:ring-brand-primary transition-all">
+            <a href="https://wa.me/34911234567" target="_blank" rel="noopener" className="group bg-chrome rounded-xl p-5 ring-1 ring-ink-100 hover:ring-brand-primary transition-all">
               <span className="block w-4 h-4 rounded-full bg-[#25D366] mb-3" aria-hidden />
               <p className="text-xs uppercase tracking-widest text-ink-500 font-mono">WhatsApp</p>
               <p className="mt-1 text-ink-900 font-medium">Responde en ~3 min</p>

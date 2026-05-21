@@ -1,6 +1,6 @@
 import { useTranslations, useLocale } from 'next-intl';
-import { Star } from 'lucide-react';
-import { reviews } from '@/data/location';
+import { Star, ExternalLink } from 'lucide-react';
+import { reviews, GOOGLE_MAPS_LISTING_URL } from '@/data/location';
 
 /**
  * Reviews — verified Google reviews.
@@ -27,9 +27,14 @@ export function Reviews() {
                 <Star key={i} size={16} className="fill-brand-secondary text-brand-secondary" aria-hidden />
               ))}
             </div>
-            <span className="font-mono tabular-nums">4.9 / 5</span>
-            <span>·</span>
-            <span>+2.300 reseñas en Google</span>
+            <a
+              href={GOOGLE_MAPS_LISTING_URL}
+              target="_blank"
+              rel="noopener"
+              className="font-mono tabular-nums hover:text-brand-primary inline-flex items-center gap-1"
+            >
+              Ver puntuación en Google <ExternalLink size={12} />
+            </a>
           </div>
         </div>
 
@@ -39,7 +44,7 @@ export function Reviews() {
             return (
               <article
                 key={r.id}
-                className="bg-paper rounded-2xl p-6 shadow-card ring-1 ring-ink-100 flex flex-col"
+                className="group bg-paper rounded-2xl p-6 shadow-card ring-1 ring-ink-100 flex flex-col"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex gap-0.5">
@@ -55,13 +60,28 @@ export function Reviews() {
                   )}
                 </div>
                 <blockquote className="text-ink-900 leading-relaxed text-balance flex-1">
-                  "{body}"
+                  &ldquo;{body}&rdquo;
                 </blockquote>
                 <footer className="mt-5 pt-4 border-t border-ink-100 flex items-center justify-between">
                   <span className="text-sm font-medium text-ink-900">{r.author}</span>
-                  <time className="text-xs text-ink-500 font-mono" dateTime={r.date}>
-                    {new Date(r.date).toLocaleDateString(locale === 'es' ? 'es-ES' : locale === 'en' ? 'en-GB' : 'zh-CN', { year: 'numeric', month: 'short' })}
-                  </time>
+                  {r.sourceUrl ? (
+                    <a
+                      href={r.sourceUrl}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-xs text-ink-500 font-mono hover:text-brand-primary inline-flex items-center gap-1"
+                      aria-label={`Ver reseña de ${r.author} en Google`}
+                    >
+                      <time dateTime={r.date}>
+                        {new Date(r.date).toLocaleDateString(locale === 'es' ? 'es-ES' : locale === 'en' ? 'en-GB' : 'zh-CN', { year: 'numeric', month: 'short' })}
+                      </time>
+                      <ExternalLink size={11} />
+                    </a>
+                  ) : (
+                    <time className="text-xs text-ink-500 font-mono" dateTime={r.date}>
+                      {new Date(r.date).toLocaleDateString(locale === 'es' ? 'es-ES' : locale === 'en' ? 'en-GB' : 'zh-CN', { year: 'numeric', month: 'short' })}
+                    </time>
+                  )}
                 </footer>
               </article>
             );
@@ -69,7 +89,15 @@ export function Reviews() {
         </div>
 
         <p className="mt-8 text-sm text-ink-500 text-center">
-          {tCommon('verifiedReview')} · <a href="#" className="text-brand-primary hover:underline">Ver todas en Google</a>
+          {tCommon('verifiedReview')} ·{' '}
+          <a
+            href={GOOGLE_MAPS_LISTING_URL}
+            target="_blank"
+            rel="noopener"
+            className="text-brand-primary hover:underline inline-flex items-center gap-1"
+          >
+            Ver todas en Google <ExternalLink size={12} />
+          </a>
         </p>
       </div>
     </section>

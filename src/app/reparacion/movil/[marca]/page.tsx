@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight, Smartphone } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { getBrand, brands } from '@/data/brands';
 import { models } from '@/data/models';
 import { repairTypes } from '@/data/repair-types';
+import { ModelImage } from '@/components/ui/ModelImage';
+import { BrandLogo } from '@/components/ui/BrandLogo';
 
 export async function generateStaticParams() {
   return brands.map(b => ({ marca: b.slug }));
@@ -81,13 +83,11 @@ export default async function BrandPage({ params }: { params: Promise<{ marca: s
                 className="group relative bg-paper rounded-2xl p-5 ring-1 ring-ink-100 hover:ring-brand-primary hover:-translate-y-0.5 transition-all duration-fast ease-out-expo shadow-card"
               >
                 {i === 0 && (
-                  <span className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-brand-secondary text-shadow-blue text-[10px] font-bold uppercase tracking-widest">
+                  <span className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-brand-secondary text-white text-[10px] font-bold uppercase tracking-widest z-10">
                     Top
                   </span>
                 )}
-                <div className="aspect-square rounded-xl bg-ink-100 flex items-center justify-center text-ink-300 mb-4">
-                  <Smartphone size={36} aria-hidden />
-                </div>
+                <ModelImage modelName={m.name} brandSlug={brand.slug} className="mb-4" />
                 <p className="font-semibold text-ink-900">{m.name}</p>
                 <p className="text-xs font-mono text-ink-500 mt-1">{m.year}</p>
                 <p className="mt-3 text-xs text-brand-primary group-hover:underline">
