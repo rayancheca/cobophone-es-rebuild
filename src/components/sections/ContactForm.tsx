@@ -19,7 +19,9 @@ const Schema = z.object({
   email: z.string().email('Necesitamos un email válido').max(180),
   phone: z.string().max(40).optional().or(z.literal('')),
   message: z.string().min(8, 'Cuéntanos un poco más').max(2000),
-  consent: z.literal(true, { errorMap: () => ({ message: 'Tienes que aceptar la política de privacidad' }) })
+  consent: z.literal(true, { errorMap: () => ({ message: 'Tienes que aceptar la política de privacidad' }) }),
+  // F25 honeypot — invisible to humans (positioned off-screen + aria-hidden + tabIndex=-1)
+  website: z.string().max(0).optional().or(z.literal(''))
 });
 
 type FormValues = z.infer<typeof Schema>;
@@ -34,7 +36,7 @@ export function ContactForm() {
     formState: { errors }
   } = useForm<FormValues>({
     resolver: zodResolver(Schema),
-    defaultValues: { name: '', email: '', phone: '', message: '', consent: false as never }
+    defaultValues: { name: '', email: '', phone: '', message: '', consent: false as never, website: '' }
   });
 
   async function onSubmit(values: FormValues) {
@@ -128,6 +130,14 @@ export function ContactForm() {
             >
               <h3 className="text-xl font-semibold mb-1">O mándanos un email</h3>
               <p className="text-sm text-ink-500 mb-6">Te respondemos en menos de 24h en horario laboral.</p>
+
+              {/* F25 honeypot — visually hidden, tabbable false, real users never see it */}
+              <div aria-hidden className="absolute -left-[9999px] -top-[9999px] w-0 h-0 overflow-hidden">
+                <label>
+                  Website (no rellenar)
+                  <input type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
+                </label>
+              </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <Field label="Nombre" error={errors.name?.message} required>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Inter, JetBrains_Mono, Noto_Sans_SC } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { NavBar } from '@/components/layout/NavBar';
@@ -20,6 +20,16 @@ const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-jetbrains'
+});
+
+// F26 — Noto Sans SC for the zh-Hans locale (loaded for every locale via
+// the CSS variable so the `font-cjk` token has it ready; it only renders
+// when actually used). 400 + 500 + 700 covers body, ui, and headings.
+const notoSC = Noto_Sans_SC({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-noto-sc',
+  weight: ['400', '500', '700']
 });
 
 export const metadata: Metadata = {
@@ -70,7 +80,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${inter.variable} ${jetbrains.variable} ${notoSC.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

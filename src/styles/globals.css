@@ -46,7 +46,7 @@
   --font-display: var(--font-geist), system-ui, -apple-system, sans-serif;
   --font-body:    var(--font-geist), system-ui, -apple-system, sans-serif;
   --font-mono:    var(--font-jetbrains), 'SF Mono', Consolas, monospace;
-  --font-cjk:     'Noto Sans SC', 'PingFang SC', sans-serif;
+  --font-cjk:     var(--font-noto-sc), 'PingFang SC', 'Noto Sans SC', sans-serif;
 
   --text-xs:   clamp(0.75rem,  0.72rem + 0.1vw, 0.8125rem);
   --text-sm:   clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
@@ -118,6 +118,11 @@
     color: var(--color-ink-900);
     font-family: var(--font-body);
     font-feature-settings: 'ss01', 'cv01', 'cv11';
+  }
+
+  /* F26 — Chinese locale gets Noto Sans SC as the primary body font */
+  html[lang^="zh"] body {
+    font-family: var(--font-cjk);
   }
 
   /* Display headings */
