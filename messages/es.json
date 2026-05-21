@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "siteName": "CoboPhone",
+    "tagline": "Reparamos tu móvil en 40 minutos",
+    "secondaryTagline": "Si no sabemos el fallo, es que no existe."
+  },
+  "nav": {
+    "repair": "Reparación",
+    "store": "Tienda",
+    "wholesale": "Mayoristas",
+    "pickup": "Recogida",
+    "location": "Ubicación",
+    "about": "Sobre nosotros",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "quote": "Pedir presupuesto",
+    "whatsapp": "WhatsApp",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Reparación de electrónica · Madrid · Desde 2005",
+      "headline": "Reparamos tu móvil en 40 minutos.",
+      "sub": "Sin sorpresas. Con garantía de 3 meses. 20 años en Cobo Calleja.",
+      "ctaPrimary": "Calcular precio",
+      "ctaSecondary": "Hablar por WhatsApp",
+      "trustStrip": [
+        { "number": "40", "unit": "min", "label": "Reparación estándar" },
+        { "number": "20", "unit": "años", "label": "En Cobo Calleja" },
+        { "number": "20.000", "unit": "+", "label": "Reparaciones realizadas" },
+        { "number": "3", "unit": "meses", "label": "Garantía completa" }
+      ]
+    },
+    "promise": {
+      "eyebrow": "Cómo funciona",
+      "headline": "Tres pasos. Sin sorpresas.",
+      "steps": [
+        {
+          "n": "01",
+          "title": "Dinos qué pasó",
+          "body": "Calcula el precio en 30 segundos. Marca, modelo, fallo. Te damos un rango cerrado por WhatsApp."
+        },
+        {
+          "n": "02",
+          "title": "Trae tu equipo o lo recogemos",
+          "body": "Pásate por la tienda en Cobo Calleja o pídenos recogida gratuita. Para el resto de España, te mandamos etiqueta prepagada."
+        },
+        {
+          "n": "03",
+          "title": "40 minutos y a casa",
+          "body": "La mayoría de reparaciones estándar salen en 40 minutos. Garantía de 3 meses. Sin letra pequeña."
+        }
+      ]
+    },
+    "services": {
+      "eyebrow": "Qué reparamos",
+      "headline": "Toda tu electrónica. Un solo taller.",
+      "items": [
+        { "slug": "movil", "name": "Móviles", "desc": "Pantalla, batería, cámara, conector de carga" },
+        { "slug": "tablet", "name": "Tablets", "desc": "iPad y Android. Pantalla, batería, placa" },
+        { "slug": "portatil", "name": "Portátiles", "desc": "Pantalla, batería, disco, sistema operativo" },
+        { "slug": "smartwatch", "name": "Smartwatches", "desc": "Pantalla, batería, sensores" },
+        { "slug": "consola", "name": "Consolas", "desc": "PlayStation, Xbox, Nintendo. Lectores y mandos" },
+        { "slug": "television", "name": "Televisores", "desc": "Reemplazo de LEDs y placa principal" },
+        { "slug": "patinete-electrico", "name": "Patinetes eléctricos", "desc": "Batería, rueda, freno, eléctrica" }
+      ]
+    },
+    "brands": {
+      "eyebrow": "Marcas",
+      "headline": "Sabemos exactamente cómo abrir tu dispositivo.",
+      "subline": "8 marcas principales. Más de 600 modelos en catálogo. Si tu marca no aparece, te la reparamos igual.",
+      "list": [
+        { "slug": "samsung", "name": "Samsung", "count": 128 },
+        { "slug": "apple", "name": "Apple", "count": 38 },
+        { "slug": "xiaomi", "name": "Xiaomi", "count": 112 },
+        { "slug": "oppo", "name": "Oppo", "count": 65 },
+        { "slug": "realme", "name": "Realme", "count": 51 },
+        { "slug": "huawei", "name": "Huawei", "count": 27 },
+        { "slug": "google", "name": "Google", "count": 8 },
+        { "slug": "honor", "name": "Honor", "count": 15 }
+      ]
+    },
+    "wholesale": {
+      "eyebrow": "Mayoristas",
+      "headline": "¿Tienes una tienda de reparación?",
+      "body": "Estamos en Cobo Calleja desde 2005, el centro logístico más grande de Asia en Europa. Pantallas, baterías y piezas al por mayor con envío 24h a toda España. Precios para profesionales.",
+      "cta": "Ver portal mayoristas"
+    },
+    "reviews": {
+      "eyebrow": "Lo que dicen",
+      "headline": "Reseñas verificadas de Google."
+    },
+    "location": {
+      "eyebrow": "Ubicación",
+      "headline": "Calle Bembibre 5, Cobo Calleja.",
+      "body": "Polígono Industrial Cobo Calleja, Fuenlabrada. Aparcamiento gratuito. Abierto domingo, cerrado sábado.",
+      "cta": "Cómo llegar"
+    },
+    "final": {
+      "headline": "Empezamos por tu modelo.",
+      "sub": "30 segundos. Precio cerrado. Sin compromiso.",
+      "cta": "Calcular precio"
+    }
+  },
+  "quote": {
+    "title": "Presupuesto en 30 segundos",
+    "sub": "Sin compromiso. Te damos un rango cerrado por WhatsApp.",
+    "steps": {
+      "category": { "title": "¿Qué dispositivo?", "label": "Dispositivo" },
+      "brand":    { "title": "¿Qué marca?",     "label": "Marca" },
+      "model":    { "title": "¿Qué modelo?",    "label": "Modelo", "search": "Buscar modelo…" },
+      "repair":   { "title": "¿Qué le pasa?",   "label": "Reparación" },
+      "price":    { "title": "Precio estimado", "label": "Precio" }
+    },
+    "back": "Atrás",
+    "next": "Siguiente",
+    "popular": "Lo más frecuente",
+    "showAll": "Ver todos",
+    "noMatch": "No vemos tu modelo. Mándanos un mensaje y te ayudamos.",
+    "whatsappEscape": "Hablar con un técnico",
+    "price": {
+      "rangeLabel": "Precio estimado",
+      "confidence": "Confirmamos en 2 minutos por WhatsApp.",
+      "checks": [
+        "40 minutos de reparación",
+        "3 meses de garantía",
+        "Diagnóstico gratuito"
+      ],
+      "bookCta": "Reservar reparación",
+      "whatsappCta": "Hablar con un técnico",
+      "uploadPhoto": "Sube una foto del daño (opcional)",
+      "anchor": "Comprar un {model} nuevo cuesta unos {newPrice}. Repararlo cuesta unos {repairPrice}."
+    },
+    "confirm": {
+      "received": "Recibido.",
+      "next": "Te llamamos en 5 minutos para confirmar.",
+      "addCalendar": "Añadir al calendario",
+      "doubt": "¿Tienes una duda? Escríbenos por WhatsApp."
+    }
+  },
+  "footer": {
+    "tagline": "Reparamos tu móvil en 40 minutos. Madrid, desde 2005.",
+    "services": "Servicios",
+    "company": "Empresa",
+    "wholesale": "Mayoristas",
+    "legal": "Legal",
+    "hours": "Horario",
+    "hoursDetail": "L–V 10:00–19:00 · Sáb cerrado · Dom 10:00–19:00",
+    "address": "Calle Bembibre 5, Local A · Polígono Cobo Calleja · 28947 Fuenlabrada · Madrid",
+    "copyright": "© {year} CoboPhone. Todos los derechos reservados.",
+    "newsletter": {
+      "label": "Recibe consejos de mantenimiento y avisos de ofertas",
+      "placeholder": "tu@email.com",
+      "cta": "Suscribirme",
+      "consent": "Acepto recibir comunicaciones. Puedes darte de baja cuando quieras."
+    }
+  },
+  "common": {
+    "from": "Desde",
+    "warranty": "3 meses de garantía",
+    "diagnostic": "Diagnóstico gratuito",
+    "minutes": "min",
+    "callNow": "Llamar ahora",
+    "whatsapp": "WhatsApp",
+    "openNow": "Abierto ahora",
+    "closed": "Cerrado",
+    "opensIn": "Abre en {time}",
+    "verifiedReview": "Reseña verificada"
+  }
+}

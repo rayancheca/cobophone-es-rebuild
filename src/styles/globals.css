@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens — sourced from /design/01-tokens.css */
+:root {
+  /* Brand */
+  --color-brand-primary:        oklch(56% 0.22 252);
+  --color-brand-primary-hover:  oklch(50% 0.22 252);
+  --color-brand-primary-active: oklch(44% 0.22 252);
+  --color-brand-secondary:        oklch(82% 0.17 80);
+  --color-brand-secondary-hover:  oklch(76% 0.17 80);
+  --color-brand-accent:         oklch(76% 0.18 165);
+
+  /* Neutrals — light mode */
+  --color-ink-900: oklch(18% 0.012 250);
+  --color-ink-700: oklch(34% 0.010 250);
+  --color-ink-500: oklch(54% 0.008 250);
+  --color-ink-300: oklch(78% 0.006 250);
+  --color-ink-100: oklch(94% 0.004 250);
+  --color-paper:   oklch(99% 0.002 250);
+  --color-chrome:  oklch(100% 0 0);
+
+  /* Dark surfaces */
+  --color-shadow-blue:      oklch(20% 0.06 260);
+  --color-shadow-blue-deep: oklch(14% 0.06 260);
+
+  /* Semantic */
+  --color-success: var(--color-brand-accent);
+  --color-warning: oklch(80% 0.16 70);
+  --color-danger:  oklch(60% 0.22 25);
+  --color-info:    var(--color-brand-primary);
+
+  /* Typography */
+  --font-display: var(--font-geist), system-ui, -apple-system, sans-serif;
+  --font-body:    var(--font-geist), system-ui, -apple-system, sans-serif;
+  --font-mono:    var(--font-jetbrains), 'SF Mono', Consolas, monospace;
+  --font-cjk:     'Noto Sans SC', 'PingFang SC', sans-serif;
+
+  --text-xs:   clamp(0.75rem,  0.72rem + 0.1vw, 0.8125rem);
+  --text-sm:   clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-base: clamp(1rem,     0.96rem + 0.2vw, 1.0625rem);
+  --text-lg:   clamp(1.125rem, 1.08rem + 0.2vw, 1.1875rem);
+  --text-xl:   clamp(1.375rem, 1.30rem + 0.4vw, 1.5rem);
+  --text-2xl:  clamp(1.75rem,  1.60rem + 0.7vw, 2rem);
+  --text-3xl:  clamp(2.25rem,  2.00rem + 1.2vw, 2.75rem);
+  --text-4xl:  clamp(3rem,     2.50rem + 2vw,   4rem);
+  --text-5xl:  clamp(3.75rem,  2.80rem + 4vw,   6rem);
+  --text-6xl:  clamp(4.5rem,   3.00rem + 6vw,   8rem);
+
+  --tracking-tighter: -0.04em;
+  --tracking-tight:   -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.02em;
+  --tracking-widest:  0.08em;
+
+  --radius-xs:  0.25rem;
+  --radius-sm:  0.375rem;
+  --radius-md:  0.5rem;
+  --radius-lg:  0.75rem;
+  --radius-xl:  1rem;
+  --radius-2xl: 1.5rem;
+
+  --shadow-hairline: 0 0 0 1px oklch(0% 0 0 / 0.06);
+  --shadow-card:     0 1px 3px oklch(0% 0 0 / 0.04), 0 2px 8px oklch(0% 0 0 / 0.03);
+  --shadow-elevated: 0 4px 12px oklch(0% 0 0 / 0.08), 0 12px 32px oklch(0% 0 0 / 0.06);
+  --shadow-pop:      0 8px 24px oklch(56% 0.22 252 / 0.18);
+
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart:   cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --space-section: clamp(4rem, 3rem + 5vw, 10rem);
+
+  --container-max:    1440px;
+  --container-narrow: 1080px;
+  --container-prose:  720px;
+
+  --grid-dot-color: oklch(0% 0 0 / 0.06);
+}
+
+[data-surface="dark"] {
+  --color-ink-900: oklch(98% 0.004 250);
+  --color-ink-700: oklch(82% 0.006 250);
+  --color-ink-500: oklch(62% 0.008 250);
+  --color-ink-300: oklch(40% 0.010 250);
+  --color-ink-100: oklch(28% 0.012 250);
+  --color-paper:   var(--color-shadow-blue);
+  --color-chrome:  var(--color-shadow-blue-deep);
+  --shadow-card: 0 1px 3px oklch(0% 0 0 / 0.4), 0 2px 8px oklch(0% 0 0 / 0.3);
+  --shadow-hairline: 0 0 0 1px oklch(100% 0 0 / 0.08);
+  --grid-dot-color: oklch(100% 0 0 / 0.08);
+}
+
+@layer base {
+  html {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink-900);
+    font-family: var(--font-body);
+    font-feature-settings: 'ss01', 'cv01', 'cv11';
+  }
+
+  /* Display headings */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-ink-900);
+  }
+
+  h1 {
+    font-size: var(--text-5xl);
+    line-height: 1.05;
+    letter-spacing: var(--tracking-tighter);
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: var(--text-4xl);
+    line-height: 1.08;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: var(--text-2xl);
+    line-height: 1.15;
+    font-weight: 500;
+  }
+
+  h4 {
+    font-size: var(--text-xl);
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  p {
+    line-height: 1.55;
+  }
+
+  /* Mono for numbers */
+  .num, code, kbd, samp {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Focus ring */
+  *:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  ::selection {
+    background: oklch(56% 0.22 252 / 0.18);
+    color: var(--color-ink-900);
+  }
+}
+
+@layer components {
+  /* Dot-grid signature motif — workshop-bench backdrop */
+  .dot-grid {
+    background-image: radial-gradient(circle, var(--grid-dot-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Chevron stamp — the trust-signal motif */
+  .chevron-stamp::before {
+    content: '›';
+    display: inline-block;
+    margin-right: 0.5em;
+    color: var(--color-brand-primary);
+    font-weight: 700;
+    transform: translateY(-1px);
+  }
+
+  /* Container utilities */
+  .container-fluid {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3rem);
+    max-width: var(--container-max);
+  }
+
+  .container-narrow {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3rem);
+    max-width: var(--container-narrow);
+  }
+
+  .container-prose {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+    max-width: var(--container-prose);
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' /%3E%3C/svg%3E");
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

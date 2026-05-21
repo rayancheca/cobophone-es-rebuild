@@ -1,0 +1,23 @@
+import { HomeHero } from '@/components/sections/HomeHero';
+import { HowItWorks } from '@/components/sections/HowItWorks';
+import { Services } from '@/components/sections/Services';
+import { Brands } from '@/components/sections/Brands';
+import { Reviews } from '@/components/sections/Reviews';
+import { WholesaleTeaser } from '@/components/sections/WholesaleTeaser';
+import { LocationBlock } from '@/components/sections/LocationBlock';
+import { FinalCta } from '@/components/sections/FinalCta';
+
+export default function HomePage() {
+  return (
+    <>
+      <HomeHero />
+      <HowItWorks />
+      <Services />
+      <Brands />
+      <Reviews />
+      <WholesaleTeaser />
+      <LocationBlock />
+      <FinalCta />
+    </>
+  );
+}

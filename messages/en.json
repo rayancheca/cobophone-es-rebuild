@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "siteName": "CoboPhone",
+    "tagline": "Phone repaired in 40 minutes.",
+    "secondaryTagline": "If we can't diagnose it, it doesn't exist."
+  },
+  "nav": {
+    "repair": "Repair",
+    "store": "Store",
+    "wholesale": "Wholesale",
+    "pickup": "Pickup",
+    "location": "Location",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "quote": "Get a quote",
+    "whatsapp": "WhatsApp",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Electronics repair · Madrid · Since 2005",
+      "headline": "Phone repaired in 40 minutes.",
+      "sub": "No surprises. 3-month warranty. 20 years in Cobo Calleja.",
+      "ctaPrimary": "Get a price",
+      "ctaSecondary": "Chat on WhatsApp",
+      "trustStrip": [
+        { "number": "40", "unit": "min", "label": "Standard repair" },
+        { "number": "20", "unit": "years", "label": "In Cobo Calleja" },
+        { "number": "20,000", "unit": "+", "label": "Repairs completed" },
+        { "number": "3", "unit": "months", "label": "Full warranty" }
+      ]
+    },
+    "promise": {
+      "eyebrow": "How it works",
+      "headline": "Three steps. No surprises.",
+      "steps": [
+        {
+          "n": "01",
+          "title": "Tell us what happened",
+          "body": "Get a price in 30 seconds. Brand, model, fault. We confirm by WhatsApp."
+        },
+        {
+          "n": "02",
+          "title": "Drop it off or we pick it up",
+          "body": "Visit the shop in Cobo Calleja or request free pickup. Anywhere in Spain — we send a prepaid label."
+        },
+        {
+          "n": "03",
+          "title": "40 minutes and back home",
+          "body": "Most standard repairs are ready in 40 minutes. 3-month warranty. No fine print."
+        }
+      ]
+    },
+    "services": {
+      "eyebrow": "What we fix",
+      "headline": "All your electronics. One workshop.",
+      "items": [
+        { "slug": "movil", "name": "Phones", "desc": "Screen, battery, camera, charging port" },
+        { "slug": "tablet", "name": "Tablets", "desc": "iPad and Android. Screen, battery, board" },
+        { "slug": "portatil", "name": "Laptops", "desc": "Screen, battery, drive, operating system" },
+        { "slug": "smartwatch", "name": "Smartwatches", "desc": "Screen, battery, sensors" },
+        { "slug": "consola", "name": "Consoles", "desc": "PlayStation, Xbox, Nintendo. Drives and controllers" },
+        { "slug": "television", "name": "Televisions", "desc": "LED replacement, mainboard" },
+        { "slug": "patinete-electrico", "name": "E-scooters", "desc": "Battery, wheel, brake, electrical" }
+      ]
+    },
+    "brands": {
+      "eyebrow": "Brands",
+      "headline": "We know exactly how to open your device.",
+      "subline": "8 major brands. 600+ models in catalog. If your brand isn't listed, we still repair it.",
+      "list": [
+        { "slug": "samsung", "name": "Samsung", "count": 128 },
+        { "slug": "apple", "name": "Apple", "count": 38 },
+        { "slug": "xiaomi", "name": "Xiaomi", "count": 112 },
+        { "slug": "oppo", "name": "Oppo", "count": 65 },
+        { "slug": "realme", "name": "Realme", "count": 51 },
+        { "slug": "huawei", "name": "Huawei", "count": 27 },
+        { "slug": "google", "name": "Google", "count": 8 },
+        { "slug": "honor", "name": "Honor", "count": 15 }
+      ]
+    },
+    "wholesale": {
+      "eyebrow": "Wholesale",
+      "headline": "Running a repair shop?",
+      "body": "We've been in Cobo Calleja since 2005 — Europe's largest Asian-trade logistics hub. Screens, batteries, and parts wholesale with 24-hour shipping anywhere in Spain. Pro pricing.",
+      "cta": "See wholesale portal"
+    },
+    "reviews": {
+      "eyebrow": "What they say",
+      "headline": "Verified Google reviews."
+    },
+    "location": {
+      "eyebrow": "Location",
+      "headline": "Calle Bembibre 5, Cobo Calleja.",
+      "body": "Polígono Industrial Cobo Calleja, Fuenlabrada. Free parking. Open Sunday, closed Saturday.",
+      "cta": "Get directions"
+    },
+    "final": {
+      "headline": "Start with your model.",
+      "sub": "30 seconds. Fixed price range. No commitment.",
+      "cta": "Get a price"
+    }
+  },
+  "quote": {
+    "title": "30-second quote",
+    "sub": "No commitment. We confirm by WhatsApp.",
+    "steps": {
+      "category": { "title": "Which device?", "label": "Device" },
+      "brand":    { "title": "Which brand?",  "label": "Brand" },
+      "model":    { "title": "Which model?",  "label": "Model", "search": "Search model…" },
+      "repair":   { "title": "What's wrong?", "label": "Repair" },
+      "price":    { "title": "Estimated price", "label": "Price" }
+    },
+    "back": "Back",
+    "next": "Next",
+    "popular": "Most common",
+    "showAll": "Show all",
+    "noMatch": "We don't see your model. Drop us a message — we'll help.",
+    "whatsappEscape": "Talk to a technician",
+    "price": {
+      "rangeLabel": "Estimated price",
+      "confidence": "We confirm in 2 minutes on WhatsApp.",
+      "checks": [
+        "40-minute repair",
+        "3-month warranty",
+        "Free diagnostic"
+      ],
+      "bookCta": "Book repair",
+      "whatsappCta": "Talk to a technician",
+      "uploadPhoto": "Upload a photo of the damage (optional)",
+      "anchor": "A new {model} costs around {newPrice}. Repairing it costs around {repairPrice}."
+    },
+    "confirm": {
+      "received": "Received.",
+      "next": "We'll call you in 5 minutes to confirm.",
+      "addCalendar": "Add to calendar",
+      "doubt": "Got a question? Message us on WhatsApp."
+    }
+  },
+  "footer": {
+    "tagline": "Phone repaired in 40 minutes. Madrid, since 2005.",
+    "services": "Services",
+    "company": "Company",
+    "wholesale": "Wholesale",
+    "legal": "Legal",
+    "hours": "Hours",
+    "hoursDetail": "Mon–Fri 10:00–19:00 · Sat closed · Sun 10:00–19:00",
+    "address": "Calle Bembibre 5, Local A · Polígono Cobo Calleja · 28947 Fuenlabrada · Madrid",
+    "copyright": "© {year} CoboPhone. All rights reserved.",
+    "newsletter": {
+      "label": "Maintenance tips and occasional offers",
+      "placeholder": "your@email.com",
+      "cta": "Subscribe",
+      "consent": "I accept communications. Unsubscribe anytime."
+    }
+  },
+  "common": {
+    "from": "From",
+    "warranty": "3-month warranty",
+    "diagnostic": "Free diagnostic",
+    "minutes": "min",
+    "callNow": "Call now",
+    "whatsapp": "WhatsApp",
+    "openNow": "Open now",
+    "closed": "Closed",
+    "opensIn": "Opens in {time}",
+    "verifiedReview": "Verified review"
+  }
+}

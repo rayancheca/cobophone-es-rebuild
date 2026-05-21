@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "siteName": "CoboPhone",
+    "tagline": "40分钟手机维修",
+    "secondaryTagline": "如果我们无法诊断，那它就不存在。"
+  },
+  "nav": {
+    "repair": "维修",
+    "store": "商店",
+    "wholesale": "批发",
+    "pickup": "上门取件",
+    "location": "位置",
+    "about": "关于我们",
+    "blog": "博客",
+    "contact": "联系",
+    "quote": "获取报价",
+    "whatsapp": "WhatsApp",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "电子产品维修 · 马德里 · 自 2005 年",
+      "headline": "40 分钟修好您的手机。",
+      "sub": "无意外。三个月质保。Cobo Calleja 二十年专业经验。",
+      "ctaPrimary": "获取报价",
+      "ctaSecondary": "WhatsApp 咨询",
+      "trustStrip": [
+        { "number": "40", "unit": "分钟", "label": "标准维修" },
+        { "number": "20", "unit": "年", "label": "Cobo Calleja" },
+        { "number": "20,000", "unit": "+", "label": "成功维修" },
+        { "number": "3", "unit": "个月", "label": "完整质保" }
+      ]
+    },
+    "promise": {
+      "eyebrow": "工作流程",
+      "headline": "三步完成，绝无意外。",
+      "steps": [
+        { "n": "01", "title": "告诉我们故障", "body": "30 秒获取报价。品牌、型号、故障。我们通过 WhatsApp 确认。" },
+        { "n": "02", "title": "送修或上门取件", "body": "Cobo Calleja 门店送修，或免费上门。西班牙其它地区提供预付快递标签。" },
+        { "n": "03", "title": "40 分钟取件", "body": "大多数标准维修 40 分钟完成。三个月质保。没有附加条款。" }
+      ]
+    },
+    "services": {
+      "eyebrow": "维修范围",
+      "headline": "所有电子设备。一个工作坊。",
+      "items": [
+        { "slug": "movil", "name": "手机", "desc": "屏幕、电池、摄像头、充电口" },
+        { "slug": "tablet", "name": "平板", "desc": "iPad 和 Android。屏幕、电池、主板" },
+        { "slug": "portatil", "name": "笔记本", "desc": "屏幕、电池、硬盘、操作系统" },
+        { "slug": "smartwatch", "name": "智能手表", "desc": "屏幕、电池、传感器" },
+        { "slug": "consola", "name": "游戏机", "desc": "PlayStation、Xbox、Nintendo。光驱与手柄" },
+        { "slug": "television", "name": "电视", "desc": "LED 灯条更换、主板" },
+        { "slug": "patinete-electrico", "name": "电动滑板车", "desc": "电池、轮胎、刹车、电路" }
+      ]
+    },
+    "brands": {
+      "eyebrow": "品牌",
+      "headline": "我们熟悉每一台设备的拆装。",
+      "subline": "八大品牌。600 余款型号目录。未列出的品牌同样可修。",
+      "list": [
+        { "slug": "samsung", "name": "Samsung", "count": 128 },
+        { "slug": "apple", "name": "Apple", "count": 38 },
+        { "slug": "xiaomi", "name": "Xiaomi", "count": 112 },
+        { "slug": "oppo", "name": "Oppo", "count": 65 },
+        { "slug": "realme", "name": "Realme", "count": 51 },
+        { "slug": "huawei", "name": "Huawei", "count": 27 },
+        { "slug": "google", "name": "Google", "count": 8 },
+        { "slug": "honor", "name": "Honor", "count": 15 }
+      ]
+    },
+    "wholesale": {
+      "eyebrow": "批发",
+      "headline": "您也经营维修店？",
+      "body": "我们位于 Cobo Calleja —— 欧洲最大的亚洲贸易物流中心，自 2005 年起经营至今。屏幕、电池、配件批发，西班牙全境 24 小时送达。专业价格。",
+      "cta": "进入批发门户"
+    },
+    "reviews": { "eyebrow": "客户评价", "headline": "Google 真实好评。" },
+    "location": {
+      "eyebrow": "位置",
+      "headline": "Calle Bembibre 5, Cobo Calleja。",
+      "body": "Polígono Industrial Cobo Calleja，Fuenlabrada。免费停车。周日营业，周六休息。",
+      "cta": "查看路线"
+    },
+    "final": {
+      "headline": "从您的设备开始。",
+      "sub": "30 秒。明码标价。无需承诺。",
+      "cta": "获取报价"
+    }
+  },
+  "quote": {
+    "title": "30 秒获取报价",
+    "sub": "无需承诺。我们通过 WhatsApp 确认。",
+    "steps": {
+      "category": { "title": "哪种设备？", "label": "设备" },
+      "brand":    { "title": "哪个品牌？", "label": "品牌" },
+      "model":    { "title": "哪个型号？", "label": "型号", "search": "搜索型号…" },
+      "repair":   { "title": "什么故障？", "label": "维修项目" },
+      "price":    { "title": "预估价格",   "label": "价格" }
+    },
+    "back": "返回",
+    "next": "下一步",
+    "popular": "最常见",
+    "showAll": "查看全部",
+    "noMatch": "未找到您的型号。给我们留言，我们会协助处理。",
+    "whatsappEscape": "联系技师",
+    "price": {
+      "rangeLabel": "预估价格",
+      "confidence": "我们通过 WhatsApp 两分钟内确认。",
+      "checks": ["40 分钟维修", "三个月质保", "免费诊断"],
+      "bookCta": "预约维修",
+      "whatsappCta": "联系技师",
+      "uploadPhoto": "上传损坏照片（可选）",
+      "anchor": "全新 {model} 约需 {newPrice}。维修约需 {repairPrice}。"
+    },
+    "confirm": {
+      "received": "已收到。",
+      "next": "5 分钟内致电确认。",
+      "addCalendar": "添加到日历",
+      "doubt": "有疑问？通过 WhatsApp 联系我们。"
+    }
+  },
+  "footer": {
+    "tagline": "40 分钟修好您的手机。马德里，自 2005 年。",
+    "services": "服务",
+    "company": "公司",
+    "wholesale": "批发",
+    "legal": "法律",
+    "hours": "营业时间",
+    "hoursDetail": "周一至周五 10:00–19:00 · 周六休息 · 周日 10:00–19:00",
+    "address": "Calle Bembibre 5, Local A · Polígono Cobo Calleja · 28947 Fuenlabrada · 马德里",
+    "copyright": "© {year} CoboPhone。版权所有。",
+    "newsletter": {
+      "label": "维修建议与优惠通知",
+      "placeholder": "您的邮箱",
+      "cta": "订阅",
+      "consent": "我同意接收信息。可随时退订。"
+    }
+  },
+  "common": {
+    "from": "起",
+    "warranty": "三个月质保",
+    "diagnostic": "免费诊断",
+    "minutes": "分钟",
+    "callNow": "立即致电",
+    "whatsapp": "WhatsApp",
+    "openNow": "营业中",
+    "closed": "已打烊",
+    "opensIn": "{time} 后营业",
+    "verifiedReview": "已验证评价"
+  }
+}
