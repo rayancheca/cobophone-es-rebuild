@@ -60,6 +60,21 @@ export default function SobreNosotrosPage() {
         </div>
       </section>
 
+      {/* F15 — the signature tagline lives here too, as a closing brand moment */}
+      <section className="py-section bg-shadow-blue text-white" data-surface="dark">
+        <div className="container-narrow text-center">
+          <p className="font-mono text-xs uppercase tracking-widest text-brand-secondary mb-6">
+            La tagline que llevamos 20 años cumpliendo
+          </p>
+          <h2 className="text-white text-balance" style={{ fontSize: 'clamp(2rem, 1.5rem + 3vw, 4rem)', lineHeight: 1.1 }}>
+            Si no sabemos el fallo, es que no existe.
+          </h2>
+          <p className="mt-6 text-lg text-ink-700 max-w-xl mx-auto">
+            Si lo abrimos, lo sabemos arreglar. Y si no, te decimos la verdad antes de cobrar nada.
+          </p>
+        </div>
+      </section>
+
       <section className="py-section bg-paper">
         <div className="container-narrow text-center">
           <h2 className="text-balance">Si tu móvil pasa por nuestras manos, lo tratamos como pasaría por las nuestras.</h2>

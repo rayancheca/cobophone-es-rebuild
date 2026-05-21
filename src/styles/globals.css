@@ -26,6 +26,10 @@
   --color-ink-100: oklch(92% 0.008 295);   /* hairlines / dividers */
   --color-paper:   oklch(97% 0.008 295);   /* warm off-white with lightest violet tint */
   --color-chrome:  oklch(99% 0.005 295);   /* near-white cards, slight warmth */
+  /* F17 — signature violet-tinted surface for moments that need to carry the
+   * brand in light mode (trust band, "Pro" tier, price columns). */
+  --color-violet-mist: oklch(95% 0.025 305);
+  --color-magenta-mist: oklch(95% 0.030 350);
 
   /* Dark surfaces — deep violet-black (token name kept "shadow-blue"
    * for class-name stability across components). */

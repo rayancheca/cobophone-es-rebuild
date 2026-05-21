@@ -35,7 +35,7 @@ export default function UbicacionPage() {
           <div className="grid md:grid-cols-2 gap-10">
             <article>
               <h2 className="text-balance">Horario</h2>
-              <p className="mt-3 text-ink-700">Abrimos los domingos porque Cobo Calleja vive de los domingos. Cerramos los sábados — sí, al revés que casi toda España.</p>
+              <p className="mt-3 text-ink-700">Abrimos los domingos porque Cobo Calleja vive de los domingos. Cerramos los sábados. Sí, al revés que casi toda España.</p>
               <table className="mt-6 w-full text-sm">
                 <tbody>
                   {Object.entries(cobophoneLocation.hours).map(([day, windows]) => (

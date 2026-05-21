@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
-import { ArrowRight, MessageCircle, Wrench, Clock, ShieldCheck } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 import { ButtonLink } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
 
 export function HomeHero() {
   const t = useTranslations('home.hero');
-  const tCommon = useTranslations('common');
   const locale = useLocale();
   const prefix = locale === 'es' ? '' : `/${locale}`;
 
@@ -56,12 +54,16 @@ export function HomeHero() {
                 target="_blank"
                 rel="noopener"
                 size="xl"
-                variant="whatsapp"
+                variant="outline"
+                className="!text-white !ring-white/30 hover:!bg-white/5"
               >
-                <MessageCircle size={18} aria-hidden />
+                <MessageCircle size={18} aria-hidden className="text-[#25D366]" />
                 {t('ctaSecondary')}
               </ButtonLink>
             </div>
+            <p className="mt-3 text-xs text-ink-500 font-mono">
+              Responde un técnico en ~3 min
+            </p>
 
             {/* Secondary tagline — adopted from the current site, was buried */}
             <p className="mt-12 text-sm text-ink-500 font-mono">
@@ -91,18 +93,9 @@ export function HomeHero() {
           ))}
         </div>
 
-        {/* Inline trust badges */}
-        <div className="mt-8 flex flex-wrap items-center gap-3 pb-12 lg:pb-16">
-          <Badge variant="amber" className="!bg-brand-secondary/20 !text-brand-secondary !ring-brand-secondary/40">
-            <Clock size={12} aria-hidden /> 40 min
-          </Badge>
-          <Badge variant="green" className="!bg-brand-accent/15 !text-brand-accent !ring-brand-accent/30">
-            <ShieldCheck size={12} aria-hidden /> {tCommon('warranty')}
-          </Badge>
-          <Badge variant="blue" className="!bg-white/5 !text-ink-300 !ring-white/10">
-            <Wrench size={12} aria-hidden /> {tCommon('diagnostic')}
-          </Badge>
-        </div>
+        {/* F12 — removed redundant pill row; the 4-cell trust strip already
+            communicates 40 min, garantía, repairs done. Single trust voice. */}
+        <div className="pb-12 lg:pb-16" />
       </div>
     </section>
   );

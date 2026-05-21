@@ -228,14 +228,33 @@ function ReasonCard({ icon, title, body }: { icon: React.ReactNode; title: strin
   );
 }
 
+/* F23 — Pro tier wins the page: dark surface, slight scale, magenta badge.
+ * Starter / Volume stay light with outline ring so Pro is the centerpiece. */
 function TierCard({ name, range, bullets, recommended }: { name: string; range: string; bullets: string[]; recommended?: boolean }) {
-  return (
-    <article className={`relative bg-chrome rounded-2xl p-6 lg:p-8 ring-1 shadow-card ${recommended ? 'ring-brand-primary shadow-pop' : 'ring-ink-100'}`}>
-      {recommended && (
-        <span className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-brand-primary text-white text-xs font-medium uppercase tracking-widest">
-          Recomendado
+  if (recommended) {
+    return (
+      <article
+        data-surface="dark"
+        className="relative bg-shadow-blue text-white rounded-2xl p-6 lg:p-8 ring-1 ring-brand-secondary/40 shadow-pop md:scale-[1.04] md:-my-1 z-10"
+      >
+        <span className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-brand-secondary text-white text-xs font-bold uppercase tracking-widest shadow-lg">
+          ★ Recomendado
         </span>
-      )}
+        <h3 className="text-2xl font-semibold text-white">{name}</h3>
+        <p className="mt-1 text-sm font-mono text-ink-700">{range}</p>
+        <ul className="mt-6 space-y-2.5">
+          {bullets.map((b, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-ink-300">
+              <span className="text-brand-secondary mt-0.5">›</span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    );
+  }
+  return (
+    <article className="relative bg-chrome rounded-2xl p-6 lg:p-8 ring-1 ring-ink-100 shadow-card">
       <h3 className="text-2xl font-semibold text-ink-900">{name}</h3>
       <p className="mt-1 text-sm font-mono text-ink-500">{range}</p>
       <ul className="mt-6 space-y-2.5">

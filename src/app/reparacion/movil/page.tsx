@@ -6,7 +6,8 @@ import { repairTypes } from '@/data/repair-types';
 import { buildWhatsAppLink } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Reparación de móviles en Madrid · 8 marcas · 600+ modelos',
+  // F7 — title trimmed to fit Google SERP (was 74 chars after brand suffix).
+  title: 'Reparación de móviles en Madrid · 600+ modelos',
   description:
     'Reparamos pantalla, batería, cámara, conector de carga y placa de todos los modelos. Samsung, iPhone, Xiaomi, Oppo, Huawei, Google y más. 40 min · 3 meses de garantía · diagnóstico gratuito.'
 };

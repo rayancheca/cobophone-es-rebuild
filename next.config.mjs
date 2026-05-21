@@ -30,6 +30,24 @@ const nextConfig = {
     ];
   },
   async headers() {
+    // Content Security Policy — permissive enough for Next.js inline styles
+    // and the Google Maps embed iframe; tighten with nonces in a follow-up
+    // once we've verified all third-party origins.
+    const csp = [
+      "default-src 'self'",
+      "img-src 'self' data: blob: https:",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
+      "connect-src 'self' https: vercel-vitals.axiom.co",
+      "frame-src https://www.google.com https://maps.google.com https://wa.me",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "object-src 'none'",
+      'upgrade-insecure-requests'
+    ].join('; ');
+
     return [
       {
         source: '/(.*)',
@@ -37,7 +55,9 @@ const nextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self)' }
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self)' },
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+          { key: 'Content-Security-Policy', value: csp }
         ]
       }
     ];

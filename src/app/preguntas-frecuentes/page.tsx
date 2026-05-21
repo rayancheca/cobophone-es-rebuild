@@ -4,7 +4,8 @@ import { MessageCircle } from 'lucide-react';
 import { buildWhatsAppLink } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Preguntas frecuentes · CoboPhone',
+  // F8 — was "Preguntas frecuentes · CoboPhone · CoboPhone" (brand duplicated by template suffix)
+  title: 'Preguntas frecuentes · Reparación, garantía, precios',
   description: 'Tiempos, garantía, precios, recogida, cómo llegar. Las respuestas a lo que la gente nos pregunta a diario.'
 };
 

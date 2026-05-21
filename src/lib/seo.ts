@@ -88,27 +88,68 @@ export function localBusinessJsonLd() {
 export function modelOfferJsonLd({
   modelName,
   modelSlug,
+  brandSlug,
   priceMin,
   priceMax,
   offerCount
 }: {
   modelName: string;
   modelSlug: string;
+  brandSlug?: string;
   priceMin: number;
   priceMax: number;
   offerCount: number;
 }) {
+  const url = `${SITE}/reparacion/movil/${brandSlug ?? modelSlug.split('-')[0]}/${modelSlug}`;
   return {
     '@context': 'https://schema.org',
     '@type': 'AggregateOffer',
     name: `Reparación ${modelName}`,
     description: `Servicio de reparación para ${modelName}: pantalla, batería, conector de carga, cámara y más.`,
-    url: `${SITE}/reparacion/movil/${modelSlug.split('-')[0]}/${modelSlug}`,
+    url,
     priceCurrency: 'EUR',
     lowPrice: priceMin,
     highPrice: priceMax,
     offerCount,
     seller: { '@id': `${SITE}/#business` }
+  };
+}
+
+/**
+ * Service JSON-LD wrapping an AggregateOffer — surfaces the page in Google's
+ * service-business rich results in addition to the offer carousel.
+ */
+export function modelServiceJsonLd({
+  modelName,
+  modelSlug,
+  brandSlug,
+  priceMin,
+  priceMax,
+  offerCount
+}: {
+  modelName: string;
+  modelSlug: string;
+  brandSlug: string;
+  priceMin: number;
+  priceMax: number;
+  offerCount: number;
+}) {
+  const url = `${SITE}/reparacion/movil/${brandSlug}/${modelSlug}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Reparación ${modelName}`,
+    serviceType: 'Reparación de móvil',
+    provider: { '@id': `${SITE}/#business` },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' },
+    url,
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'EUR',
+      lowPrice: priceMin,
+      highPrice: priceMax,
+      offerCount
+    }
   };
 }
 

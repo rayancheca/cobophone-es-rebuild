@@ -5,7 +5,7 @@ import { getLocale, getMessages } from 'next-intl/server';
 import { NavBar } from '@/components/layout/NavBar';
 import { Footer } from '@/components/layout/Footer';
 import { MobileStickyBar } from '@/components/layout/MobileStickyBar';
-import { Chatbot } from '@/components/chat/Chatbot';
+import { ChatbotMount } from '@/components/chat/ChatbotMount';
 import { localBusinessJsonLd } from '@/lib/seo';
 import '@/styles/globals.css';
 
@@ -89,7 +89,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main id="main" className="pb-20 lg:pb-0">{children}</main>
           <Footer />
           <MobileStickyBar />
-          <Chatbot />
+          <ChatbotMount />
         </NextIntlClientProvider>
       </body>
     </html>

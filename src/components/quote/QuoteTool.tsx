@@ -123,7 +123,7 @@ export function QuoteTool() {
               modelSlug={state.modelSlug}
               repairSlug={state.repairSlug}
               onBack={() => state.setStep(4)}
-              onBook={() => state.markSubmitted()}
+              onBook={() => { /* handled inside Step5 with real API */ }}
             />
           )}
           {state.step === 6 && (
@@ -157,25 +157,57 @@ function Step1({ onSelect }: { onSelect: (slug: string) => void }) {
   return (
     <section aria-labelledby="step1-h">
       <h2 id="step1-h" className="text-2xl font-semibold mb-6">{t('steps.category.title')}</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {categories.map(c => {
-          const Icon = c.icon;
-          return (
+      {/* F22 — Móvil promoted to hero tile (it's ~85% of real traffic);
+          the other 6 categories fall into a 6-col secondary grid below */}
+      {(() => {
+        const movil = categories.find(c => c.slug === 'movil')!;
+        const rest = categories.filter(c => c.slug !== 'movil');
+        const MovilIcon = movil.icon;
+        return (
+          <div className="space-y-3">
             <button
-              key={c.slug}
               type="button"
-              onClick={() => onSelect(c.slug)}
-              className="group text-left p-5 rounded-xl bg-paper ring-1 ring-ink-100 hover:ring-brand-primary hover:bg-chrome hover:-translate-y-0.5 transition-all duration-fast ease-out-expo"
+              onClick={() => onSelect(movil.slug)}
+              className="group relative w-full text-left p-6 lg:p-8 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-primary-active text-white ring-1 ring-brand-primary/30 hover:shadow-pop hover:-translate-y-0.5 transition-all duration-fast ease-out-expo overflow-hidden"
             >
-              <div className="w-11 h-11 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
-                <Icon size={22} aria-hidden />
+              <span className="absolute top-4 right-4 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-brand-secondary text-white text-[10px] font-bold uppercase tracking-widest">
+                ★ Lo más común
+              </span>
+              <div className="flex items-start gap-5">
+                <div className="w-14 h-14 rounded-xl bg-white/15 text-white flex items-center justify-center shrink-0">
+                  <MovilIcon size={28} aria-hidden />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-display font-bold text-2xl lg:text-3xl">{movil.name}</p>
+                  <p className="mt-1 text-sm text-white/80">{movil.desc}</p>
+                  <p className="mt-3 text-xs font-mono text-white/70 uppercase tracking-widest">
+                    Desde €39 · 40 min · Garantía 3 meses
+                  </p>
+                </div>
               </div>
-              <p className="mt-4 font-semibold text-ink-900">{c.name}</p>
-              <p className="mt-1 text-xs text-ink-500">{c.desc}</p>
             </button>
-          );
-        })}
-      </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+              {rest.map(c => {
+                const Icon = c.icon;
+                return (
+                  <button
+                    key={c.slug}
+                    type="button"
+                    onClick={() => onSelect(c.slug)}
+                    className="group text-center p-4 rounded-xl bg-paper ring-1 ring-ink-100 hover:ring-brand-primary hover:bg-chrome hover:-translate-y-0.5 transition-all duration-fast ease-out-expo"
+                  >
+                    <div className="w-10 h-10 mx-auto rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                      <Icon size={20} aria-hidden />
+                    </div>
+                    <p className="mt-3 font-semibold text-sm text-ink-900">{c.name}</p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
     </section>
   );
 }
@@ -335,15 +367,85 @@ function Step4({ modelSlug, onBack, onSelect }: { modelSlug: string; onBack: () 
   );
 }
 
-// ─── Step 5 — Price reveal ──────────────────────────────────────
+// ─── Step 5 — Price reveal + inline booking form ────────────────
 
-function Step5({ modelSlug, repairSlug, onBack, onBook }: { modelSlug: string; repairSlug: string; onBack: () => void; onBook: () => void }) {
+function Step5({ modelSlug, repairSlug, onBack }: { modelSlug: string; repairSlug: string; onBack: () => void; onBook: () => void }) {
   const t = useTranslations('quote');
   const model = getModel(modelSlug);
   const repair = getRepairType(repairSlug);
   const price = getPrice(modelSlug, repairSlug);
+  const markSubmitted = useQuoteStore(s => s.markSubmitted);
+
+  // Booking form local state
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [flow, setFlow] = useState<'walkin' | 'mailin'>('walkin');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  // Count-up animation for price
+  const [displayMin, setDisplayMin] = useState(0);
+  const [displayMax, setDisplayMax] = useState(0);
+
+  useEffect(() => {
+    if (!price) return;
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplayMin(price.priceMin);
+      setDisplayMax(price.priceMax);
+      return;
+    }
+    const duration = 700;
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      // easeOutExpo
+      const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+      setDisplayMin(Math.round(price.priceMin * eased));
+      setDisplayMax(Math.round(price.priceMax * eased));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [price]);
 
   const whatsappMsg = `Hola, mi ${model?.name} necesita ${repair?.name.es.toLowerCase()}. Precio estimado: ${price ? formatPrice(price.priceMin, price.priceMax) : 'a consultar'}. ¿Cuándo podéis recibirme?`;
+
+  async function submitBooking(e: React.FormEvent) {
+    e.preventDefault();
+    if (!model || !repair || !price) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          modelSlug: model.slug,
+          modelName: model.name,
+          repairSlug: repair.slug,
+          repairName: repair.name.es,
+          priceMin: price.priceMin,
+          priceMax: price.priceMax,
+          customer: { name, phone, email },
+          flow
+        })
+      });
+      if (!res.ok) throw new Error(`Status ${res.status}`);
+      const result = await res.json();
+      if (!result.ok) throw new Error('booking_failed');
+      markSubmitted({
+        reference: result.reference,
+        callback: result.callback,
+        booking: result.booking
+      });
+    } catch (err) {
+      setSubmitError('No se pudo enviar la reserva. Inténtalo de nuevo o escríbenos por WhatsApp.');
+      setSubmitting(false);
+    }
+  }
 
   return (
     <section aria-labelledby="step5-h">
@@ -356,9 +458,19 @@ function Step5({ modelSlug, repairSlug, onBack, onBook }: { modelSlug: string; r
 
         {price ? (
           <>
-            <p className="font-mono font-bold tabular-nums text-ink-900 mt-3 tracking-tight"
-               style={{ fontSize: 'clamp(3rem, 2rem + 6vw, 6rem)', lineHeight: 1 }}>
-              {formatPrice(price.priceMin, price.priceMax)}
+            <p
+              className="font-mono font-bold tabular-nums mt-3 tracking-tight"
+              style={{
+                fontSize: 'clamp(3rem, 2rem + 6vw, 6rem)',
+                lineHeight: 1,
+                background: 'linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-secondary) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+              aria-label={`Precio estimado entre ${price.priceMin} y ${price.priceMax} euros`}
+            >
+              {formatPrice(displayMin, displayMax)}
             </p>
             <p className="mt-3 text-xs text-ink-500 uppercase tracking-widest">{t('price.rangeLabel')}</p>
           </>
@@ -393,26 +505,114 @@ function Step5({ modelSlug, repairSlug, onBack, onBook }: { modelSlug: string; r
         </div>
       )}
 
-      <div className="grid sm:grid-cols-2 gap-3">
-        <button
-          type="button"
-          onClick={onBook}
-          className="inline-flex items-center justify-center gap-2 h-14 px-6 rounded-xl bg-brand-primary text-white font-medium hover:bg-brand-primary-hover transition-colors shadow-pop"
-        >
-          {t('price.bookCta')}
-          <ArrowRight size={18} aria-hidden />
-        </button>
-        <ButtonLink
-          href={buildWhatsAppLink(whatsappMsg)}
-          target="_blank"
-          rel="noopener"
-          variant="whatsapp"
-          size="lg"
-        >
-          <MessageCircle size={18} aria-hidden />
-          {t('price.whatsappCta')}
-        </ButtonLink>
-      </div>
+      {!bookingOpen ? (
+        <div className="grid sm:grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => setBookingOpen(true)}
+            className="inline-flex items-center justify-center gap-2 h-14 px-6 rounded-xl bg-brand-primary text-white font-medium hover:bg-brand-primary-hover transition-colors shadow-pop"
+          >
+            {t('price.bookCta')}
+            <ArrowRight size={18} aria-hidden />
+          </button>
+          <ButtonLink
+            href={buildWhatsAppLink(whatsappMsg)}
+            target="_blank"
+            rel="noopener"
+            variant="whatsapp"
+            size="lg"
+          >
+            <MessageCircle size={18} aria-hidden />
+            {t('price.whatsappCta')}
+          </ButtonLink>
+        </div>
+      ) : (
+        <form onSubmit={submitBooking} className="bg-paper rounded-xl p-5 lg:p-6 ring-1 ring-ink-100 space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-semibold text-ink-900">Reservar reparación</p>
+            <button type="button" onClick={() => setBookingOpen(false)} className="text-xs text-ink-500 hover:text-ink-900">
+              Cancelar
+            </button>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-3">
+            <label className="block">
+              <span className="block text-xs font-medium text-ink-900 mb-1.5">Nombre *</span>
+              <input
+                type="text"
+                required
+                autoComplete="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg bg-chrome ring-1 ring-ink-300 focus:ring-2 focus:ring-brand-primary focus:outline-none text-sm"
+              />
+            </label>
+            <label className="block">
+              <span className="block text-xs font-medium text-ink-900 mb-1.5">Teléfono *</span>
+              <input
+                type="tel"
+                required
+                autoComplete="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="+34 ..."
+                className="w-full px-3 py-2.5 rounded-lg bg-chrome ring-1 ring-ink-300 focus:ring-2 focus:ring-brand-primary focus:outline-none text-sm"
+              />
+            </label>
+          </div>
+
+          <label className="block">
+            <span className="block text-xs font-medium text-ink-900 mb-1.5">Email <span className="text-ink-500">(opcional, para el resguardo)</span></span>
+            <input
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-3 py-2.5 rounded-lg bg-chrome ring-1 ring-ink-300 focus:ring-2 focus:ring-brand-primary focus:outline-none text-sm"
+            />
+          </label>
+
+          <fieldset>
+            <legend className="block text-xs font-medium text-ink-900 mb-2">¿Cómo prefieres?</legend>
+            <div className="grid grid-cols-2 gap-2">
+              <label className={cn(
+                'flex items-center gap-2 px-3 py-2.5 rounded-lg ring-1 cursor-pointer text-sm',
+                flow === 'walkin' ? 'ring-brand-primary bg-brand-primary/5' : 'ring-ink-300 bg-chrome hover:ring-ink-900'
+              )}>
+                <input type="radio" name="flow" value="walkin" checked={flow === 'walkin'} onChange={() => setFlow('walkin')} className="text-brand-primary focus:ring-brand-primary" />
+                <span>Pasar por la tienda</span>
+              </label>
+              <label className={cn(
+                'flex items-center gap-2 px-3 py-2.5 rounded-lg ring-1 cursor-pointer text-sm',
+                flow === 'mailin' ? 'ring-brand-primary bg-brand-primary/5' : 'ring-ink-300 bg-chrome hover:ring-ink-900'
+              )}>
+                <input type="radio" name="flow" value="mailin" checked={flow === 'mailin'} onChange={() => setFlow('mailin')} className="text-brand-primary focus:ring-brand-primary" />
+                <span>Recogida / envío</span>
+              </label>
+            </div>
+          </fieldset>
+
+          {submitError && (
+            <div className="flex items-start gap-2 p-3 bg-danger/10 ring-1 ring-danger/30 rounded-lg text-xs text-ink-900">
+              <span className="text-danger">⚠</span> {submitError}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="w-full inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-brand-primary text-white font-medium hover:bg-brand-primary-hover transition-colors disabled:opacity-60 disabled:cursor-not-allowed shadow-pop"
+          >
+            {submitting ? 'Enviando…' : 'Confirmar reserva'}
+            {!submitting && <ArrowRight size={18} aria-hidden />}
+          </button>
+
+          <p className="text-[11px] text-ink-500 text-center">
+            Al enviar, aceptas que un técnico de CoboPhone te contacte sobre esta reparación.{' '}
+            <a href="/legal/privacidad" className="underline">Política de privacidad</a>.
+          </p>
+        </form>
+      )}
 
       <p className="mt-4 text-xs text-center text-ink-500">{t('price.uploadPhoto')}</p>
     </section>
@@ -422,33 +622,131 @@ function Step5({ modelSlug, repairSlug, onBack, onBook }: { modelSlug: string; r
 // ─── Step 6 — Confirmation (peak-end moment) ────────────────────
 
 function Step6Confirmation() {
-  const t = useTranslations('quote');
   const state = useQuoteStore();
+  const result = state.bookingResult;
   const model = state.modelSlug ? getModel(state.modelSlug) : null;
   const repair = state.repairSlug ? getRepairType(state.repairSlug) : null;
 
-  return (
-    <section className="text-center py-8 lg:py-12" aria-labelledby="step6-h">
-      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-accent text-white mb-6">
-        <Check size={32} />
-      </div>
-      <h2 id="step6-h" className="text-3xl font-semibold">{t('confirm.received')}</h2>
-      <p className="mt-3 text-lg text-ink-700">{t('confirm.next')}</p>
-
-      <div className="mt-8 bg-paper rounded-xl p-6 text-left max-w-md mx-auto ring-1 ring-ink-100">
-        <p className="text-xs uppercase tracking-widest text-ink-500 font-mono mb-3">Resumen</p>
-        {model && <p className="text-ink-900"><strong>{model.name}</strong></p>}
-        {repair && <p className="text-ink-700">{repair.name.es} · {repair.warrantyMonths} meses de garantía</p>}
-      </div>
-
-      <p className="mt-8 text-sm text-ink-500">
-        ¿Tienes una duda?{' '}
-        <a href={buildWhatsAppLink('Hola, acabo de reservar una reparación, tengo una duda.')} target="_blank" rel="noopener" className="text-brand-primary hover:underline">
-          Escríbenos por WhatsApp.
+  // If no booking result (deep link or refresh), gracefully fall back.
+  if (!result || !model || !repair) {
+    return (
+      <section className="text-center py-8" aria-labelledby="step6-h">
+        <h2 id="step6-h" className="text-2xl font-semibold">Reserva no disponible</h2>
+        <p className="mt-3 text-ink-700">Vuelve a empezar el presupuesto o escríbenos por WhatsApp.</p>
+        <a
+          href={buildWhatsAppLink('Hola, quería volver a reservar una reparación.')}
+          target="_blank"
+          rel="noopener"
+          className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#25D366] text-white font-medium hover:bg-[#1DA851]"
+        >
+          <MessageCircle size={16} /> WhatsApp
         </a>
+      </section>
+    );
+  }
+
+  // Build a .ics calendar event for the callback
+  const calendarUrl = buildIcsDataUrl({
+    title: `CoboPhone te llama — ${result.booking.modelName}`,
+    description: `Llamada de confirmación para reparación: ${result.booking.repairName}. Referencia ${result.reference}.`,
+    start: new Date(result.callback.iso),
+    durationMin: 15
+  });
+
+  return (
+    <section className="py-8 lg:py-12" aria-labelledby="step6-h">
+      <div className="text-center">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-accent text-white mb-6">
+          <Check size={32} />
+        </div>
+        <h2 id="step6-h" className="text-3xl font-semibold">Reserva confirmada.</h2>
+        <p className="mt-3 text-lg text-ink-700">
+          Te llamamos {result.callback.label} para confirmar el horario y la pieza.
+        </p>
+      </div>
+
+      {/* Reference + booking summary */}
+      <div className="mt-8 max-w-md mx-auto bg-paper rounded-xl ring-1 ring-ink-100 overflow-hidden">
+        <div className="px-6 py-4 bg-brand-primary/5 border-b border-ink-100 flex items-center justify-between">
+          <span className="text-xs uppercase tracking-widest text-ink-500 font-mono">Referencia</span>
+          <span className="text-sm font-mono font-bold text-brand-primary tabular-nums">{result.reference}</span>
+        </div>
+        <div className="px-6 py-5 space-y-2">
+          <p className="text-ink-900"><strong>{result.booking.modelName}</strong></p>
+          <p className="text-sm text-ink-700">{result.booking.repairName}</p>
+          <p className="text-sm text-ink-700">
+            <span className="font-mono tabular-nums">{formatPrice(result.booking.priceMin, result.booking.priceMax)}</span>
+            {' · '}{repair.warrantyMonths} meses garantía · {result.booking.flow === 'walkin' ? 'En tienda' : 'Recogida / envío'}
+          </p>
+        </div>
+      </div>
+
+      {/* Qué traer / Next steps */}
+      <div className="mt-6 max-w-md mx-auto bg-chrome rounded-xl ring-1 ring-ink-100 p-6">
+        <p className="text-xs uppercase tracking-widest text-ink-500 font-mono mb-3">Qué tener listo</p>
+        <ul className="space-y-2 text-sm text-ink-900">
+          <li className="flex items-start gap-2">
+            <Check size={14} className="text-brand-accent mt-0.5 shrink-0" aria-hidden />
+            <span>Tu {result.booking.modelName}, encendido si es posible.</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <Check size={14} className="text-brand-accent mt-0.5 shrink-0" aria-hidden />
+            <span>Patrón / PIN si lo tiene puesto (lo necesitamos para probarlo después).</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <Check size={14} className="text-brand-accent mt-0.5 shrink-0" aria-hidden />
+            <span>{result.booking.flow === 'walkin' ? 'Pasa por Calle Bembibre 5, Cobo Calleja, en horario.' : 'Te mandamos etiqueta prepagada por email/WhatsApp.'}</span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Actions */}
+      <div className="mt-6 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <a
+          href={calendarUrl}
+          download="cobophone.ics"
+          className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-5 rounded-lg bg-chrome ring-1 ring-ink-300 text-ink-900 font-medium hover:ring-brand-primary transition-colors text-sm"
+        >
+          <Clock size={16} aria-hidden /> Añadir al calendario
+        </a>
+        <a
+          href={buildWhatsAppLink(`Hola, acabo de reservar (ref. ${result.reference}). Tengo una duda.`)}
+          target="_blank"
+          rel="noopener"
+          className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-5 rounded-lg bg-[#25D366] text-white font-medium hover:bg-[#1DA851] transition-colors text-sm"
+        >
+          <MessageCircle size={16} aria-hidden /> WhatsApp
+        </a>
+      </div>
+
+      <p className="mt-8 text-xs text-center text-ink-500 max-w-sm mx-auto">
+        Si no recibes nuestra llamada en el tiempo indicado, escríbenos por WhatsApp con la referencia.
       </p>
     </section>
   );
+}
+
+/** Build a data: URL for a downloadable .ics calendar event. */
+function buildIcsDataUrl({ title, description, start, durationMin }: { title: string; description: string; start: Date; durationMin: number }) {
+  const fmt = (d: Date) =>
+    `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, '0')}${String(d.getUTCDate()).padStart(2, '0')}T${String(d.getUTCHours()).padStart(2, '0')}${String(d.getUTCMinutes()).padStart(2, '0')}00Z`;
+  const end = new Date(start.getTime() + durationMin * 60 * 1000);
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//CoboPhone//Reservation//ES',
+    'BEGIN:VEVENT',
+    `UID:${Math.random().toString(36).slice(2)}@cobophone.es`,
+    `DTSTAMP:${fmt(new Date())}`,
+    `DTSTART:${fmt(start)}`,
+    `DTEND:${fmt(end)}`,
+    `SUMMARY:${title}`,
+    `DESCRIPTION:${description}`,
+    'LOCATION:Calle Bembibre 5, Cobo Calleja, Fuenlabrada, Madrid',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  return `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`;
 }
 
 // ─── Helpers ────────────────────────────────────────────────────

@@ -8,7 +8,7 @@ import { ModelImage } from '@/components/ui/ModelImage';
 import { repairTypes } from '@/data/repair-types';
 import { getPricesForModel } from '@/data/prices';
 import { formatPrice } from '@/lib/utils';
-import { modelOfferJsonLd, breadcrumbJsonLd } from '@/lib/seo';
+import { modelOfferJsonLd, modelServiceJsonLd, breadcrumbJsonLd } from '@/lib/seo';
 
 export async function generateStaticParams() {
   return models.map(m => ({ marca: m.brandSlug, modelo: m.slug }));
@@ -35,14 +35,26 @@ export default async function ModelPage({ params }: { params: Promise<{ marca: s
   const model = getModel(modelo);
   if (!brand || !model) notFound();
 
+  // F-bonus: don't mutate the source array (was prices.sort which mutated module-level state)
   const prices = getPricesForModel(modelo);
-  const sortedPrices = prices.sort((a, b) => a.priceMin - b.priceMin);
+  const sortedPrices = [...prices].sort((a, b) => a.priceMin - b.priceMin);
   const lowestPrice = sortedPrices[0]?.priceMin ?? 0;
   const highestPrice = Math.max(...sortedPrices.map(p => p.priceMax));
 
   const offerLd = modelOfferJsonLd({
     modelName: model.name,
     modelSlug: model.slug,
+    brandSlug: brand.slug,
+    priceMin: lowestPrice,
+    priceMax: highestPrice,
+    offerCount: prices.length
+  });
+
+  // F11 — Service schema in addition to the AggregateOffer
+  const serviceLd = modelServiceJsonLd({
+    modelName: model.name,
+    modelSlug: model.slug,
+    brandSlug: brand.slug,
     priceMin: lowestPrice,
     priceMax: highestPrice,
     offerCount: prices.length
@@ -64,6 +76,7 @@ export default async function ModelPage({ params }: { params: Promise<{ marca: s
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(offerLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
       <section className="pt-28 lg:pt-40 pb-12 bg-paper">
@@ -84,7 +97,7 @@ export default async function ModelPage({ params }: { params: Promise<{ marca: s
                 <span className="w-8 h-px bg-brand-primary" aria-hidden />
                 {brand.name} · {model.year}
               </div>
-              <h1 className="text-balance">Reparar {model.name} en Madrid.</h1>
+              <h1 className="text-balance">Repara tu {model.name} en Madrid.</h1>
               <p className="mt-6 max-w-xl text-lg text-ink-700 leading-relaxed">
                 Pantalla, batería, conector de carga y más. Precio cerrado por reparación.
                 40 minutos para las reparaciones estándar. Garantía de 3 meses sin letra pequeña.

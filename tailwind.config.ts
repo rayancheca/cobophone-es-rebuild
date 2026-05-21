@@ -28,6 +28,8 @@ const config: Config = {
         // Dark surfaces
         'shadow-blue':      'var(--color-shadow-blue)',
         'shadow-blue-deep': 'var(--color-shadow-blue-deep)',
+        'violet-mist':      'var(--color-violet-mist)',
+        'magenta-mist':     'var(--color-magenta-mist)',
 
         // Semantic
         'success': 'var(--color-success)',

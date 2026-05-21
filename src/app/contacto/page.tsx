@@ -19,7 +19,7 @@ export default function ContactoPage() {
               </div>
               <h1 className="text-balance">Habla con un técnico.</h1>
               <p className="mt-6 max-w-xl text-lg text-ink-700 leading-relaxed">
-                WhatsApp es lo más rápido — responde un técnico real en menos de 3 minutos en horario comercial.
+                WhatsApp es lo más rápido. Responde un técnico real en menos de 3 minutos en horario comercial.
               </p>
 
               {/* WhatsApp first, designed as a surface */}

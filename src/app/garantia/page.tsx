@@ -7,9 +7,40 @@ export const metadata: Metadata = {
   description: 'Garantía de 3 meses sobre la reparación y la pieza sustituida. Qué cubre, qué no, y cómo reclamar. Plain Spanish, sin sorpresas.'
 };
 
+// F16 — FAQPage JSON-LD for warranty rich-result eligibility
+const warrantyFaq = [
+  {
+    q: '¿Cuánto dura la garantía de la reparación?',
+    a: '3 meses sobre la pieza sustituida y el trabajo. Para reparaciones por daño por agua o microsoldadura, 1 mes — la naturaleza del fallo justifica el periodo más corto.'
+  },
+  {
+    q: '¿Qué cubre la garantía?',
+    a: 'Defecto de la pieza sustituida durante 3 meses, mal funcionamiento atribuible al trabajo de reparación (ensamblado, cable suelto, conector incorrecto), sustitución gratuita de la pieza o reembolso si la reparación no es posible, y revisión gratuita sin compromiso.'
+  },
+  {
+    q: '¿Qué no cubre la garantía?',
+    a: 'Daños posteriores (golpes, caídas, agua tras la reparación), manipulación del dispositivo por terceros, componentes no relacionados con la pieza sustituida, pérdida de datos, y reparaciones por daño por agua (1 mes en lugar de 3).'
+  },
+  {
+    q: '¿Cómo reclamo la garantía?',
+    a: 'Trae el dispositivo a la tienda (Calle Bembibre 5, Cobo Calleja) o usa nuestra recogida gratuita. Diagnóstico gratuito en 24h. Si entra en garantía: reparación sin coste. Si no podemos repararlo: te devolvemos el importe pagado.'
+  }
+];
+
+const warrantyJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: warrantyFaq.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a }
+  }))
+};
+
 export default function GarantiaPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(warrantyJsonLd) }} />
       <section className="pt-28 lg:pt-40 pb-section bg-paper">
         <div className="container-fluid">
           <div className="inline-flex items-center gap-2 text-xs text-ink-500 uppercase tracking-widest mb-4">
