@@ -21,8 +21,10 @@ const ContactSchema = z.object({
   phone: z.string().trim().max(40).optional().or(z.literal('')),
   message: z.string().trim().min(1, 'message required').max(2000),
   consent: z.literal(true, { errorMap: () => ({ message: 'consent required' }) }),
-  // F25 honeypot — silently dropped if filled. Real users never see this field.
-  website: z.string().max(0).optional().or(z.literal(''))
+  // F25 honeypot — schema accepts any string; the handler silently drops the
+  // submission with a fake 200 if it's filled, so bots can't tell rejection
+  // from success.
+  website: z.string().optional()
 });
 
 // F25 — minimal in-memory rate limit (per IP, per minute). Survives a single

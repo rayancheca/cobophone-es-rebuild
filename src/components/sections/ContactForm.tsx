@@ -20,8 +20,10 @@ const Schema = z.object({
   phone: z.string().max(40).optional().or(z.literal('')),
   message: z.string().min(8, 'Cuéntanos un poco más').max(2000),
   consent: z.literal(true, { errorMap: () => ({ message: 'Tienes que aceptar la política de privacidad' }) }),
-  // F25 honeypot — invisible to humans (positioned off-screen + aria-hidden + tabIndex=-1)
-  website: z.string().max(0).optional().or(z.literal(''))
+  // F25 honeypot — invisible to humans (off-screen + aria-hidden + tabIndex=-1).
+  // Schema allows any string so client never errors; server drops submissions
+  // where it's filled by silently returning 200 with no real send.
+  website: z.string().optional()
 });
 
 type FormValues = z.infer<typeof Schema>;
