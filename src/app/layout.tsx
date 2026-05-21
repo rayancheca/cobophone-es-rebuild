@@ -5,6 +5,7 @@ import { getLocale, getMessages } from 'next-intl/server';
 import { NavBar } from '@/components/layout/NavBar';
 import { Footer } from '@/components/layout/Footer';
 import { MobileStickyBar } from '@/components/layout/MobileStickyBar';
+import { Chatbot } from '@/components/chat/Chatbot';
 import { localBusinessJsonLd } from '@/lib/seo';
 import '@/styles/globals.css';
 
@@ -60,7 +61,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#FAFBFC' },
-    { media: '(prefers-color-scheme: dark)', color: '#0B1B3A' }
+    { media: '(prefers-color-scheme: dark)', color: '#170A2E' }
   ]
 };
 
@@ -88,6 +89,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main id="main" className="pb-20 lg:pb-0">{children}</main>
           <Footer />
           <MobileStickyBar />
+          <Chatbot />
         </NextIntlClientProvider>
       </body>
     </html>

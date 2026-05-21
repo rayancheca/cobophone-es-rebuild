@@ -16,18 +16,21 @@
    * COLOR — BRAND
    * ============================================================ */
 
-  /* Brand primary — confident workshop blue */
-  --color-brand-primary:        oklch(56% 0.22 252);   /* ~#0B5FFF */
-  --color-brand-primary-hover:  oklch(50% 0.22 252);
-  --color-brand-primary-active: oklch(44% 0.22 252);
+  /* Brand primary — deep saturated violet
+   * Honors the live cobophone.es brand identity (purple) while refining the
+   * execution: dropped the gradient banner, restrained surface usage, paired
+   * with magenta-not-amber for the urgency moments. */
+  --color-brand-primary:        oklch(45% 0.24 305);   /* ~#6B21A8 */
+  --color-brand-primary-hover:  oklch(40% 0.24 305);
+  --color-brand-primary-active: oklch(35% 0.24 305);
 
-  /* Brand secondary — the 40-minute amber */
-  --color-brand-secondary:        oklch(82% 0.17 80);  /* ~#FFB800 */
-  --color-brand-secondary-hover:  oklch(76% 0.17 80);
-  --color-brand-secondary-active: oklch(70% 0.17 80);
+  /* Brand secondary — hot magenta. The 40-minute "urgency without alarm" color. */
+  --color-brand-secondary:        oklch(65% 0.27 350); /* ~#E11D8F */
+  --color-brand-secondary-hover:  oklch(60% 0.27 350);
+  --color-brand-secondary-active: oklch(55% 0.27 350);
 
-  /* Brand accent — service-green (success / verified states only) */
-  --color-brand-accent:         oklch(76% 0.18 165);   /* ~#00C48C */
+  /* Brand accent — verified-green (success / verified states only) */
+  --color-brand-accent:         oklch(72% 0.19 165);   /* ~#10B981 */
 
   /* ============================================================
    * COLOR — NEUTRALS (light mode)
@@ -46,8 +49,8 @@
    * COLOR — DARK SURFACES
    * ============================================================ */
 
-  --color-shadow-blue:      oklch(20% 0.06 260);  /* ~#0B1B3A — hero/3D background */
-  --color-shadow-blue-deep: oklch(14% 0.06 260);  /* deeper variant */
+  --color-shadow-blue:      oklch(15% 0.10 295);  /* deep violet-black — hero/3D background */
+  --color-shadow-blue-deep: oklch(09% 0.08 295);  /* deeper variant */
 
   /* ============================================================
    * COLOR — SEMANTIC

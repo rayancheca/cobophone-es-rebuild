@@ -1,12 +1,17 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Menu, X, MessageCircle } from 'lucide-react';
 import { ButtonLink } from '@/components/ui/Button';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { cn } from '@/lib/utils';
+
+// Pages where the hero is dark-surface and the nav should start transparent-white.
+const DARK_HERO_PATHS = ['/', '/mayoristas'];
 
 const navItems = [
   { key: 'repair',    href: '/reparacion' },
@@ -19,8 +24,12 @@ const navItems = [
 export function NavBar() {
   const t = useTranslations('nav');
   const locale = useLocale();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const overDarkHero = DARK_HERO_PATHS.includes(pathname);
+  const transparent = overDarkHero && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -35,19 +44,33 @@ export function NavBar() {
     <header
       className={cn(
         'fixed top-0 inset-x-0 z-[100] transition-all duration-fast ease-out-expo',
-        scrolled
-          ? 'bg-paper/90 backdrop-blur-md shadow-hairline'
-          : 'bg-transparent'
+        transparent ? 'bg-transparent' : 'bg-paper/90 backdrop-blur-md shadow-hairline'
       )}
     >
       <div className="container-fluid h-16 lg:h-20 flex items-center justify-between">
         {/* Logo */}
         <Link
           href={`${localePrefix}/`}
-          className="flex items-center gap-2 font-display font-semibold text-xl tracking-tighter text-ink-900"
+          className="flex items-center gap-2.5"
+          aria-label="CoboPhone — Inicio"
         >
-          <span className="inline-block w-8 h-8 rounded-md bg-brand-primary text-white text-sm font-bold flex items-center justify-center">C</span>
-          <span>CoboPhone</span>
+          <Image
+            src="/brand/logo.png"
+            alt=""
+            width={40}
+            height={40}
+            priority
+            className={cn(
+              'w-9 h-9 lg:w-10 lg:h-10 transition-[filter] duration-fast',
+              transparent ? 'brightness-0 invert' : 'brightness-0'
+            )}
+          />
+          <span className={cn(
+            'font-display font-bold text-lg lg:text-xl tracking-tight transition-colors duration-fast hidden sm:inline',
+            transparent ? 'text-white' : 'text-ink-900'
+          )}>
+            CoboPhone
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -56,10 +79,16 @@ export function NavBar() {
             <Link
               key={item.key}
               href={`${localePrefix}${item.href}`}
-              className="px-3 py-2 text-sm font-medium text-ink-700 hover:text-ink-900 transition-colors duration-micro relative group"
+              className={cn(
+                'px-3 py-2 text-sm font-medium transition-colors duration-micro relative group',
+                transparent ? 'text-white/80 hover:text-white' : 'text-ink-700 hover:text-ink-900'
+              )}
             >
               {t(item.key)}
-              <span className="absolute left-3 right-3 -bottom-1 h-[2px] bg-brand-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-fast ease-out-expo origin-left" />
+              <span className={cn(
+                'absolute left-3 right-3 -bottom-1 h-[2px] scale-x-0 group-hover:scale-x-100 transition-transform duration-fast ease-out-expo origin-left',
+                transparent ? 'bg-brand-secondary' : 'bg-brand-primary'
+              )} />
             </Link>
           ))}
         </nav>
@@ -75,7 +104,10 @@ export function NavBar() {
         {/* Mobile toggle */}
         <button
           type="button"
-          className="lg:hidden p-2 -mr-2 text-ink-900"
+          className={cn(
+            'lg:hidden p-2 -mr-2 transition-colors duration-fast',
+            transparent ? 'text-white' : 'text-ink-900'
+          )}
           onClick={() => setMobileOpen(o => !o)}
           aria-label={mobileOpen ? t('closeMenu') : t('openMenu')}
           aria-expanded={mobileOpen}

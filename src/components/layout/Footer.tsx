@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
-import { MessageCircle, Phone, Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
+import { MessageCircle, Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
 import { LocaleSwitcher } from './LocaleSwitcher';
 
 export function Footer() {
@@ -14,8 +15,14 @@ export function Footer() {
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
           {/* Brand block */}
           <div className="col-span-2">
-            <Link href={`${prefix}/`} className="inline-flex items-center gap-2 font-display text-xl font-semibold text-white">
-              <span className="inline-block w-8 h-8 rounded-md bg-brand-primary text-white text-sm font-bold flex items-center justify-center">C</span>
+            <Link href={`${prefix}/`} className="inline-flex items-center gap-2.5 font-display text-xl font-bold text-white" aria-label="CoboPhone — Inicio">
+              <Image
+                src="/brand/logo.png"
+                alt=""
+                width={40}
+                height={40}
+                className="w-10 h-10 brightness-0 invert"
+              />
               CoboPhone
             </Link>
             <p className="mt-4 max-w-sm text-ink-300 text-balance">

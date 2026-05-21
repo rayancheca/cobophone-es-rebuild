@@ -2,15 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design tokens — sourced from /design/01-tokens.css */
+/* Design tokens — sourced from /design/01-tokens.css
+ * 2026-05-21 — palette rebased on the live cobophone.es brand identity
+ * (deep violet + magenta) and refined for restraint. Black header surface,
+ * white content, signature magenta for time-urgency moments. */
 :root {
-  /* Brand */
-  --color-brand-primary:        oklch(56% 0.22 252);
-  --color-brand-primary-hover:  oklch(50% 0.22 252);
-  --color-brand-primary-active: oklch(44% 0.22 252);
-  --color-brand-secondary:        oklch(82% 0.17 80);
-  --color-brand-secondary-hover:  oklch(76% 0.17 80);
-  --color-brand-accent:         oklch(76% 0.18 165);
+  /* Brand — deep saturated violet (was blue) */
+  --color-brand-primary:        oklch(45% 0.24 305);
+  --color-brand-primary-hover:  oklch(40% 0.24 305);
+  --color-brand-primary-active: oklch(35% 0.24 305);
+  /* Brand secondary — hot magenta (was amber). Used for time-urgency moments
+   * and signature accents. Replaces the 40-minute amber stamp. */
+  --color-brand-secondary:        oklch(65% 0.27 350);
+  --color-brand-secondary-hover:  oklch(60% 0.27 350);
+  /* Accent — verified-green, only on success states (unchanged) */
+  --color-brand-accent:         oklch(72% 0.19 165);
 
   /* Neutrals — light mode */
   --color-ink-900: oklch(18% 0.012 250);
@@ -21,9 +27,10 @@
   --color-paper:   oklch(99% 0.002 250);
   --color-chrome:  oklch(100% 0 0);
 
-  /* Dark surfaces */
-  --color-shadow-blue:      oklch(20% 0.06 260);
-  --color-shadow-blue-deep: oklch(14% 0.06 260);
+  /* Dark surfaces — deep violet-black (token name kept "shadow-blue"
+   * for class-name stability across components). */
+  --color-shadow-blue:      oklch(15% 0.10 295);
+  --color-shadow-blue-deep: oklch(09% 0.08 295);
 
   /* Semantic */
   --color-success: var(--color-brand-accent);
@@ -64,7 +71,7 @@
   --shadow-hairline: 0 0 0 1px oklch(0% 0 0 / 0.06);
   --shadow-card:     0 1px 3px oklch(0% 0 0 / 0.04), 0 2px 8px oklch(0% 0 0 / 0.03);
   --shadow-elevated: 0 4px 12px oklch(0% 0 0 / 0.08), 0 12px 32px oklch(0% 0 0 / 0.06);
-  --shadow-pop:      0 8px 24px oklch(56% 0.22 252 / 0.18);
+  --shadow-pop:      0 8px 24px oklch(45% 0.24 305 / 0.28);
 
   --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart:   cubic-bezier(0.25, 1, 0.5, 1);
@@ -156,7 +163,7 @@
   }
 
   ::selection {
-    background: oklch(56% 0.22 252 / 0.18);
+    background: oklch(45% 0.24 305 / 0.22);
     color: var(--color-ink-900);
   }
 }

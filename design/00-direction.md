@@ -14,10 +14,13 @@
 ## The three contexts
 
 ### Light (default) — consumer-facing
-Bright workshop surfaces. White (`#FFFFFF`) canvas with paper (`#FAFBFC`) for subtle elevation. Ink-900 text. The brand-blue (`#0B5FFF`) used sparingly on primary CTAs and live indicators. Brand-amber (`#FFB800`) **only** on time-sensitive callouts (the 40-minute stamp, scarcity-of-slots indicators, price reveals).
+Bright workshop surfaces. White (`#FFFFFF`) canvas with paper (`#FAFBFC`) for subtle elevation. Ink-900 text. The brand-violet (`~#6B21A8`) used sparingly on primary CTAs and live indicators. Brand-magenta (`~#E11D8F`) **only** on time-sensitive callouts (the 40-minute stamp, scarcity-of-slots indicators, price reveals).
 
 ### Dark (hero + 3D moments)
-`#0B1B3A` (shadow-blue) as background. Brand-blue saturates slightly. Amber gets brighter to maintain contrast. Type contrast holds at 7:1 (AAA). Used for the home hero, the 3D scenes, the B2B mayoristas portal background.
+Deep violet-black (`oklch(15% 0.10 295)`) as background. Brand-violet saturates slightly. Magenta gets brighter to maintain contrast. Type contrast holds at 7:1 (AAA). Used for the home hero, the 3D scenes, the B2B mayoristas portal background.
+
+### Palette rationale
+The live cobophone.es uses purple + magenta as its core identity (logo bar black, gradient banner magenta-to-violet). We honor that — the brand keeps its color memory in customers' heads — but we drop the loud gradient and use the purple with discipline: as a confident primary on calm white space, with magenta as a deliberate accent for time-urgency moments only.
 
 ### B2B (mayoristas surface)
 Tonal shift: heavier, more industrial, more chrome. Same brand-blue primary. Less amber. More mono. Conveys "this is the parts side, not the consumer side" without breaking brand cohesion.
